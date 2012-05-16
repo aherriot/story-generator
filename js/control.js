@@ -65,6 +65,55 @@ control.nextChapter = function() {
 
 };
 
+control.editSettings = function () {
+	
+    $("#disclaimer").slideUp();
+    
+    $("#story").slideUp(1000, function() { 
+        
+        $("#options").slideDown(1000);
+        
+        $("#create").show();
+        $("#edit").hide();    
+    });
+
+};
+
+//createStory
+control.createStory = function () {
+	
+	//Only if the form is valid, do we create a story
+    if ( form.validate() ) {
+    	
+        //hide the disclaimer
+        $("#disclaimer").slideUp();
+        
+        
+        var whatToHide = $("#story");
+        
+        if ( $("#options").is(":visible") )
+            whatToHide = $("#options");
+        
+
+        // Hide either the story or the form, 
+        // And then generate the new story and finally reveal it.
+        whatToHide.slideUp( 1000, function() {
+
+            story.generate();
+
+            $("#story").slideDown( 1500 );
+
+            $("#edit").show();
+            $("#create").text("Create New Story");
+
+            control.currentChapter = 0;
+            control.setChapter( control.currentChapter );
+
+        });
+    }
+    
+};
+
 //Registers all the control events for JQuery
 control.initialize = function() {
 	
@@ -84,59 +133,20 @@ control.initialize = function() {
     
      
     //The edit link is pressed
-    $("#edit").click(function(event) {    
+    $("#edit").click( {control: this}, function(event) {    
         
         event.preventDefault();
-        
-        $("#disclaimer").slideUp();
-        
-        $("#story").slideUp(1000, function() { 
-            
-            $("#options").slideDown(1000);
-            
-            $("#create").show();
-            $("#edit").hide();    
-        });
+        event.data.control.editSettings();
 
      });
 
 
     // generate story button is pressed
     $("#create").click( {control: this}, function(event) { 
-
-    	var control = event.data.control;
+    	
         event.preventDefault();
-        
-        
-        //Only if the form is valid, do we create a story
-        if ( form.validate() ) {
-        	
-            //hide the disclaimer
-            $("#disclaimer").slideUp();
-            
-            
-            var whatToHide = $("#story");
-            
-            if ( $("#options").is(":visible") )
-                whatToHide = $("#options");
-            
-
-            // Hide either the story or the form, 
-            // And then generate the new story and finally reveal it.
-            whatToHide.slideUp( 1000, function() {
-
-                story.generate();
-
-                $("#story").slideDown( 1500 );
-
-                $("#edit").show();
-                $("#create").text("Create New Story");
-
-                control.currentChapter = 0;
-                control.setChapter( control.currentChapter );
-
-            });
-        }   
+        event.data.control.createStory();
+      
     });   
 	
 }
