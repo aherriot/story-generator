@@ -1,0 +1,59 @@
+body {
+
+    background-color: #301A00;
+    color: #DB9D18;
+
+    width: 600px;
+}
+
+a {
+    color: #FFFFFF;
+}
+
+h1, h2, h3 {
+
+    color: #CB8D08;
+    font-family: "Segoe Script", "Monotype Corsiva", 
+        "Apple Chancery", "URW Chancery L", cursive;
+    text-align: center;
+}
+
+p {
+    text-align: justify;
+    padding: 10px 10px;
+}
+
+hr {
+    width: 70%;
+    background-color: #CB8D08;
+    color: #CB8D08;
+    border: 0px;
+    height: 1px;
+}
+
+select {
+    color: #DB9D18;
+    background-color: #301A00;
+    border: solid 1px #CB8D08;
+}
+
+option {
+    background-color: #301A00;
+    border: solid 1px #CB8D08;
+}
+
+input[type=text] {
+    color: #DB9D18;
+    background-color: #301A00;
+    border: solid 1px #CB8D08;
+}
+
+#body {
+    background-color: #402A10;
+    text-align: center;
+}
+
+.chapterControls p, #storyControls p, #footer p {
+    text-align: center;
+}
+
