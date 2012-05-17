@@ -1,12 +1,21 @@
 //Andrew Herriot, 2011
 
-
+/**
+ * story namespace
+ * @namespace Contains functions that handle the creation of the objects.
+ */
 var story = {};
 
-//Array containing the character objects
-/** @private */
+/** 
+ * Array containing the character objects
+ * @private
+ * @type
+ */
 story.characters = new Array();
 
+/**
+ * @function
+ */
 story.generateCharacters = function() {
 	
 	for ( var i = 0; i < form.numberOfCharacters; i++ ) {
@@ -18,11 +27,18 @@ story.generateCharacters = function() {
 	}	
 };
 
-//Pick the setting for the story
+
+/**
+ * Pick the setting for the story.
+ * @function
+ */
 story.generateSetting = function() {
 	this.setting = new Setting();
 };
 
+/**
+ * @function
+ */
 story.updateHTML = function() {
 	$("#storyTitle").text("The Adventure of " + this.characters[0].firstname
     		+ " and " + this.characters[1].firstname );
@@ -38,6 +54,9 @@ story.updateHTML = function() {
     $(".chapterText").eq(2).html("<p>"+ story.characters[2].toString() +"</p>");
 };
 
+/**
+ * @function
+ */
 story.generate = function() {
 
     this.generateCharacters();

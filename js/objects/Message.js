@@ -10,12 +10,20 @@ var Message = function ( messageType, subject ) {
 	
 };
 
-Message.TYPE_I_LIKE = 0;
-Message.TYPE_WHAT_DO_YOU_LIKE = 1
-Message.TYPE_DO_YOU_LIKE = 2;
-Message.TYPE_HOW_ARE_YOU = 3;
+/** @constant */
+Message.TYPE_SELF_INTEREST = 0;
+/** @constant */
+Message.TYPE_OTHER_INTEREST = 1
+/** @constant */
+Message.TYPE_ASK_INTEREST = 2;
+/** @constant */
+Message.TYPE_ASK_OTHER = 3;
+/** @constant */
 Message.TYPE_COMPLIMENT = 4;
+/** @constant */
 Message.TYPE_INSULT = 5;
+/** @constant */
 Message.TYPE_OBSERVE = 6;
+/** @constant */
 Message.TYPE_IGNORE = 7;
 

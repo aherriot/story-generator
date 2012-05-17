@@ -1,5 +1,7 @@
-//Andrew Herriot, 2011
-
+/**
+ * @class This class contains all the methods for generating,
+ * parsing, validating, and retrieving the form data.
+ */ 
 var form = {};
 
 form.FIRST_NAME_PROMPT = "First Name";

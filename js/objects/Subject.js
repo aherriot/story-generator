@@ -12,10 +12,11 @@ var Subject = function( name, type, description ) {
 	this.description = discription;
 }
 
-/**
- * @static
- */
+/** @constant */
 Subject.TYPE_BODY_PART = 0;
+/** @constant */
 Subject.TYPE_INTEREST = 1;
+/** @constant */
 Subject.TYPE_ENTITY = 2;
+/** @constant */
 Subject.TYPE_CHARACTER = 3;
