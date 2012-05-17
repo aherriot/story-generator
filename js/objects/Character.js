@@ -104,6 +104,11 @@ var Character = function( characterIndex, detailLevel,
     
 };
 
+Character.prototype.getRelation = function( characterIndex ) {
+	
+	
+};
+
 Character.prototype.toString = function () {
         
     var string =  this.firstname + " (" + this.nickname + ") "
