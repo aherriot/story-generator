@@ -1,5 +1,3 @@
-
-
 /**
  * Creates a new SceneEntity.
  * @class This Object tracks the description of the setting

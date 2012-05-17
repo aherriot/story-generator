@@ -1,6 +1,5 @@
 /**
- * @function
- * @class This Object tracks the description of the setting
+ * @function This function initializes the page when it has loaded.
  */ 
 $(document).ready(function() {
 	

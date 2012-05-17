@@ -43,7 +43,7 @@ story.generate = function() {
     this.generateCharacters();
     this.generateSetting();
     
-    this.setHTML();
+    this.updateHTML();
    
 };
 
