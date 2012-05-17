@@ -11,30 +11,30 @@ var Character = function( characterIndex, detailLevel,
 	if ( detailLevel === 0 ) {
 		
 		// generate name
-		this.gender = randomSelection( genders );
+		this.gender = utility.randomSelection( genders );
         
         if ( this.gender === MALE ) {
 
-            var choice = randomUniqueIndex( maleNames, usedNames );
+            var choice = utility.randomUniqueIndex( maleNames, usedNames );
 
             this.firstname = maleNames[choice];
             this.nickname = maleNicknames[choice];
             
             this.title = "Mr.";
 
-            this.lastname = randomUniqueSelection( lastNames, usedLastNames );
+            this.lastname = utility.randomUniqueSelection( lastNames, usedLastNames );
 
             usedNames.push( this.firstname );
             usedLastNames.push( this.lastname );
 
         }  else {
 
-            var choice = randomUniqueIndex( femaleNames, usedNames );
+            var choice = utility.randomUniqueIndex( femaleNames, usedNames );
 
             this.firstname = femaleNames[choice];
             this.nickname = femaleNicknames[choice];
 
-            this.lastname = randomUniqueSelection( lastNames, usedLastNames );
+            this.lastname = utility.randomUniqueSelection( lastNames, usedLastNames );
 
             this.title = "Ms.";
 
@@ -62,8 +62,8 @@ var Character = function( characterIndex, detailLevel,
 	
 	if ( detailLevel === 0 || detailLevel === 1 ) {
 		
-        this.shyness = randomInt( 10 );
-        this.selfishness = randomInt( 10 );
+        this.shyness = utility.randomInt( 10 );
+        this.selfishness = utility.randomInt( 10 );
 		//this.relations = relations;
 		
 	    // Add relationships
@@ -73,7 +73,7 @@ var Character = function( characterIndex, detailLevel,
 	    for ( var i = 0; i < form.numberOfCharacters; i++ ) {
 	    	
 	    	if ( i !== this.characterIndex ) {
-	    		this.relations.push( randomInt( 10 ) );
+	    		this.relations.push( utility.randomInt( 10 ) );
 	    	} else {
 	    		this.relations.push( -1 );
 	    	}
@@ -96,11 +96,11 @@ var Character = function( characterIndex, detailLevel,
 	
     //pick some interests
     this.interests = new Array();
-    this.interests.push( randomUniqueSelection( interests, this.interests ) );
+    this.interests.push( utility.randomUniqueSelection( interests, this.interests ) );
 
     //pick some disinterests
     this.disinterests = new Array();
-    this.disinterests.push( randomUniqueSelection( interests, this.disinterests.concat( this.interests )) );
+    this.disinterests.push( utility.randomUniqueSelection( interests, this.disinterests.concat( this.interests )) );
     
 };
 

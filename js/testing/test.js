@@ -151,11 +151,10 @@ function testArrayCompare() {
 	printTest("arrayCompare(): string arrays are not equal");	
 	assert( arrayCompare(a, b), false );
 	
-	a = [new SettingObject(), new SettingObject()];
+	a = [new SceneEntity(), new SceneEntity()];
 	b = a;
 	printTest("arrayCompare(): object arrays are equal");	
 	assert( arrayCompare(a, b, objectCompare), true );
-	
 	
 }
 
@@ -200,8 +199,8 @@ function testUtilityReplaceWithRandomWords() {
 	var wordList1 = [ "short" ];
 	var wordList2 = [ "sample" ];
 	
-	sentence = replaceWithRandomWords(sentence, wordList1, 0, usedWords);
-	sentence = replaceWithRandomWords(sentence, wordList2, 1, usedWords);	
+	sentence = utility.replaceWithRandomWords(sentence, wordList1, 0, usedWords);
+	sentence = utility.replaceWithRandomWords(sentence, wordList2, 1, usedWords);	
 	
 	assert( sentence, "Testing a short, sample sentence." );
 	
@@ -223,7 +222,7 @@ function testAdlib() {
 	
 	var array = [ [sentence, [wordList1, wordList2]] ];
 	
-	sentence = adlib( array, usedWords);
+	sentence = utility.adlib( array, usedWords);
 	
 	assert( sentence, "Testing a short, sample sentence.  ");
 	

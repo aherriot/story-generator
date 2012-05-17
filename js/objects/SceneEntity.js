@@ -19,7 +19,7 @@ var SceneEntity = function ( type, name) {
 	
     if ( type === undefined ) {
     
-    	this.selection = randomIndex(sceneEntityTypes);
+    	this.selection = utility.randomIndex(sceneEntityTypes);
         this.type = sceneEntityTypes[this.selection][0];
         
     } else {
@@ -38,15 +38,19 @@ var SceneEntity = function ( type, name) {
     
     //if the object name is not defined, then find one from the list.
     if ( name === undefined ) {
-        this.name = randomSelection( sceneEntityNames[this.selection] );
+        this.name = utility.randomSelection( sceneEntityNames[this.selection] );
     } else {
         this.name = name;
     }
 
     this.descriptiveWords = new Array();
-    addWordToList(this.descriptiveWords, adjectives);
+    utility.addWordToList(this.descriptiveWords, adjectives);
     
 };
+
+SceneEntity.prototype.equals = function ( otherObject ) {
+	return  otherObject === this;
+}
 
 SceneEntity.prototype.toString = function() {
 	

@@ -1,39 +1,39 @@
 
-
+var utility = {};
 
 // Returns a random integer in the range [0, max].
-function randomInt( max ) {
+utility.randomInt = function( max ) {
 	"use strict";
     
 	return Math.floor( Math.random() * (max + 1)  );
 
-}
+};
 
 //Takes an list and returns one element at random
-function randomSelection( list ) {
+utility.randomSelection = function( list ) {
 	"use strict";
 	
-    return list[ randomInt( list.length - 1 ) ];
-}
+    return list[ this.randomInt( list.length - 1 ) ];
+};
 
 
 // Returns the index of an element from the list
-function randomIndex( list ) {
+utility.randomIndex = function( list ) {
 	"use strict";
 	
-    return randomInt( list.length - 1 );
-}
+    return this.randomInt( list.length - 1 );
+};
 
 //Randomizes the order of a list;
-function shuffle( list ) {
+utility.shuffle = function( list ) {
 	"use strict";
 	
 	return list.sort( function() { return Math.random() - 0.5 } );
-}
+};
 
 
 //Returns a random selection from the list not on alreadyUsed
-function randomUniqueSelection( list, alreadyUsed ) {
+utility.randomUniqueSelection = function( list, alreadyUsed ) {
 	"use strict";
 
     var newList = list.slice();
@@ -48,37 +48,37 @@ function randomUniqueSelection( list, alreadyUsed ) {
 
     }
 
-    return randomSelection( newList );
+    return this.randomSelection( newList );
 
-}
+};
 
 // Gets the index of an element of list, that isn't in alreadUsed
-function randomUniqueIndex( list, alreadyUsed ) {
+utility.randomUniqueIndex = function( list, alreadyUsed ) {
 	"use strict";
 
-    var selection = randomUniqueSelection( list, alreadyUsed );
+    var selection = this.randomUniqueSelection( list, alreadyUsed );
 
     return list.indexOf(selection);
 
-}
+};
 
 // Adds a new element to the list from the list of possible choices
-function addWordToList( currentList, possibleList ) {
+utility.addWordToList = function( currentList, possibleList ) {
 	"use strict";
 	
-	currentList.push( randomUniqueSelection( possibleList, currentList ) );
-}
+	currentList.push( this.randomUniqueSelection( possibleList, currentList ) );
+};
 
 // replaces each instance of "{listNumber}" with a random word from
 // the corresponding list.
-function replaceWithRandomWords(string, list, listNumber, usedWords) {
+utility.replaceWithRandomWords = function (string, list, listNumber, usedWords) {
 	"use strict";
 	
 	if ( list !== undefined ) {
 		
 		while ( string.indexOf("{" + listNumber + "}") >= 0) {
 			
-			var word = randomUniqueSelection( list, usedWords);
+			var word = this.randomUniqueSelection( list, usedWords);
 			usedWords.push(word);
 			
 			string = string.replace("{" + listNumber + "}", word);
@@ -86,31 +86,31 @@ function replaceWithRandomWords(string, list, listNumber, usedWords) {
 	}
 	
 	return string;
-}
+};
 
 // Usage:
 
-// adlib(
+// utility.adlib(
 //    [ [sentence1, [list1, list2, list3, ...] ], 
 //    [sentence2, [list1, list2, list3, ...] ],
 //    []...], usedWords
 //	);
-function adlib( array, usedWords ) {
+utility.adlib = function( array, usedWords ) {
 	"use strict";
 	
 	if ( usedWords === undefined ) {
 		var usedWords = [];
 	}
 	
-	var choice = randomInt(array.length - 1);
+	var choice = this.randomInt(array.length - 1);
 	var string = array[choice][0];
 
 	var wordLists = array[choice][1];
 	
 	for( var i in array[choice][1] ) {
-		string = replaceWithRandomWords( string, wordLists[i], i, usedWords );	
+		string = this.replaceWithRandomWords( string, wordLists[i], i, usedWords );	
 	}
 	
 	return string + "  ";
-}
+};
 

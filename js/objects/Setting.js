@@ -7,13 +7,13 @@ var Setting = function ( location ) {
 	var locationNames = ["Castle", "Desert island hut"];
 
     if ( location === undefined ) {
-        this.location = randomSelection( locationNames );
+        this.location = utility.randomSelection( locationNames );
     } else {
         this.location = location;
     }
     
     this.descriptiveWords = new Array();
-//    addWordToList(this.descriptiveWords, positiveAdjectives);
+//    utility.addWordToList(this.descriptiveWords, positiveAdjectives);
     
     this.sceneEntities = new Array();
     this.sceneEntities[0] = new SceneEntity();
@@ -38,7 +38,7 @@ Setting.prototype.equals = function( other ) {
 
 Setting.prototype.openingLine = function() {
 	
-	return adlib([ 
+	return utility.adlib([ 
 	    ["It was a {0} and {1} night!", 
 	     	[visualAdjectives, audioAdjectives] ],
 	     	
@@ -72,7 +72,7 @@ Setting.prototype.audioDescription = function() {
 
 Setting.prototype.smellDescription = function() {
 	
-	return adlib([ 
+	return utility.adlib([ 
   	    ["The {0} room was filled with a {1} and {1} odour.", 
   	     	[visualAdjectives, smellAdjectives] ],
   	     	
@@ -96,7 +96,7 @@ Setting.prototype.initialDescription = function() {
 	                    this.audioDescription,
 	                    this.smellDescription];
 	
-	shuffle( descriptions );
+	utility.shuffle( descriptions );
 	
 	paragraph += descriptions[0]();
 	paragraph += descriptions[1]();	
