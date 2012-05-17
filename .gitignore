@@ -1,0 +1,6 @@
+# scripts #
+################
+
+*.sh
+out
+.project

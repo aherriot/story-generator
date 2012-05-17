@@ -203,7 +203,6 @@ form.setTextBoxPromptEvent = function( textBoxName, promptString ) {
  
 }
 
-//TODO: Implement the validateForm function
 form.validate = function() {
 	"use strict";
 	

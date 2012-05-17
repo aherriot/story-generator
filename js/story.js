@@ -22,8 +22,8 @@ story.generateSetting = function() {
 	this.setting = new Setting();
 };
 
-story.updateHTML() = function() {
-	 $("#storyTitle").text("The Adventure of " + this.characters[0].firstname
+story.updateHTML = function() {
+	$("#storyTitle").text("The Adventure of " + this.characters[0].firstname
     		+ " and " + this.characters[1].firstname );
 
     $(".chapterTitle").eq(0).text( this.characters[0].firstname + " at the " 
