@@ -1,6 +1,9 @@
 // Character class
 
-
+/**
+ * Creates a new Character.
+ * @class Represents a Character. 
+ */ 
 var Character = function( characterIndex, detailLevel, 
 		gender, firstname, nickname, lastname, 
 		shyness, selfishness, relations ) {

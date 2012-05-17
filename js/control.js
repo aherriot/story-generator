@@ -1,5 +1,11 @@
 //Andrew Herriot, 2011
 
+/**
+ * control namespace
+ * @namespace Contains functions that handle the JQuery events in 
+ * response to input from the user.
+ */ 
+
 var control = {};
 
 control.currentChapter = 0;

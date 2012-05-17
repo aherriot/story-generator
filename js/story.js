@@ -4,6 +4,7 @@
 var story = {};
 
 //Array containing the character objects
+/** @private */
 story.characters = new Array();
 
 story.generateCharacters = function() {

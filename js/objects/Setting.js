@@ -1,6 +1,10 @@
-// This Object tracks the description of the setting
-// and the storyObjects that are contained within the scene
 
+
+/**
+ * Creates a new SceneEntity.
+ * @class This Object tracks the description of the setting
+ * and the sceneEntity that are contained within the scene.
+ */ 
 var Setting = function ( location ) {
 	"use strict";
 	

@@ -1,6 +1,9 @@
-//This class represents an object that is in the story
-// scene and can be interacted with.
 
+/**
+ * Creates a new SceneEntity.
+ * @class This class represents an entity that is in the story
+ * scene and can be interacted with.
+ */ 
 var SceneEntity = function ( type, name) {
 	"use strict";
 	

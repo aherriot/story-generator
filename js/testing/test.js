@@ -1,51 +1,70 @@
-var testCount = 1;
-var passedTests = 0;
+/**
+ * test class
+ * @class Includes the test framework and the test cases for the whole project.
+ */ 
+var test = function() { 
+	"use strict";
+	
+	console.log("Testing Andrew's Story Generator");
+	
+	test.selfTest();
+	test.utility();
+	test.control();
+	
+	console.log("");
+	console.log( test.passedTests + " of " + (test.testCount - 1) + " tests passed.");
+	
+};
+
+
+test.testCount = 1;
+test.passedTests = 0;
 
 // Prints outs a message as to whether the two values are equal
 //  Optionally can take a specified compare function
 // and an inner compare function to be passed to the compare function
-function assert( actual, expected, compareFunction, innerCompareFunction ) {
+test.assert = function( actual, expected, compareFunction, innerCompareFunction ) {
 	"use strict";
 	
 	// default compare function
 	if ( compareFunction === undefined ) {
-		compareFunction = stringCompare;
+		compareFunction = test.stringCompare;
 	}
 	
 	//Compare and print results
 	if ( compareFunction(actual, expected, innerCompareFunction)  ) {
-		console.log("Test " + testCount++ + ": Passed.");
-		passedTests++;
+		console.log("Test " + test.testCount++ + ": Passed.");
+		test.passedTests++;
 	} else {
 		console.log("");
-		console.log("########Test " + testCount++ + ": Failed.########");
+		console.log("########Test " + test.testCount++ + ": Failed.########");
 		console.log("Expected: " + expected);
 		console.log("Actual: " + actual);
 		console.log("");
 	}
-}
+};
 
 //The string compare function
 //Also the default compare function for the assert function
-function stringCompare( a, b ) {
+test.stringCompare = function( a, b ) {
 	"use strict";
 	return a === b;
-}
+};
 
-function objectCompare(a, b) {
+test.objectCompare = function(a, b) {
 	"use strict";
 	
 	return a.equals(b);
-}
+};
 
 //Compares two arrays element by element
 // can also take an optional compare function for the elements
-function arrayCompare( a, b, compareFunction) {
+test.arrayCompare = function( a, b, compareFunction) {
 	"use strict";
 	
 	// default compare function
 	if ( compareFunction === undefined ) {
-		compareFunction = stringCompare;
+		compareFunction = test.stringCompare;
 	}
 	
 	if( a.length !== b.length ) {
@@ -60,16 +79,16 @@ function arrayCompare( a, b, compareFunction) {
 	}
 	
 	return true;
-}
+};
 
 // true if a is an element of b
 // optional compare function.
-function containsCompare(a, b, compareFunction) {
+test.containsCompare = function(a, b, compareFunction) {
 	"use strict";
 	
 	// default compare function
 	if ( compareFunction === undefined ) {
-		compareFunction = stringCompare;
+		compareFunction = test.stringCompare;
 	}
 	
 	var contains = false;
@@ -84,115 +103,98 @@ function containsCompare(a, b, compareFunction) {
 	
 	return contains;
 	
-}
+};
 
-// Run all the tests in the test suite.
-function test() {
+test.print = function( name ) {
 	"use strict";
-	
-	console.log("Testing Andrew's Story Generator");
-	
-	testTest();
-	testUtility();
-	testControl();
-	
-	console.log("");
-	console.log( passedTests + " of " + (testCount - 1) + " tests passed.");
-	
-}
+	console.log("Test " + test.testCount + ": " + name + ".");
+};
 
-function printTest( name ) {
-	"use strict";
-	console.log("Test " + testCount + ": " + name + ".");
-}
-
-function hr() {
+test.printHR = function() {
 	"use strict";
 	console.log("----------------------------------------------------");
-}
+};
 
 
 
 // Test the test.js file
-function testTest() {
+test.selfTest = function() {
 	"use strict";
 	
-	hr();
+	test.printHR();
 	console.log("Testing testing/test.js\n");
 	console.log("");
 	
-	testArrayCompare();
+	test.testArrayCompare();
 	console.log("");
-	testContainsCompare();
+	test.testContainsCompare();
 	
-}
+};
 
-function testArrayCompare() {
+test.testArrayCompare = function() {
 	"use strict";
 	
 	var a = [ 1, 2, 3];
 	var b = [ 1, 2, 3];
 	
-	printTest("arrayCompare(): integer arrays are equal");	
-	assert( arrayCompare(a, b), true );
+	test.print("arrayCompare(): integer arrays are equal");	
+	test.assert( test.arrayCompare(a, b), true );
 	
 	
 	a = [1, 2];
-	printTest("arrayCompare(): integer arrays are not equal");	
-	assert( arrayCompare(a, b), false );
+	test.print("arrayCompare(): integer arrays are not equal");	
+	test.assert( test.arrayCompare(a, b), false );
 	
 	a = ["test1", "test2"];
 	b = ["test1", "test2"];
-	printTest("arrayCompare(): string arrays are equal");	
-	assert( arrayCompare(a, b), true );
+	test.print("arrayCompare(): string arrays are equal");	
+	test.assert( test.arrayCompare(a, b), true );
 	
 	
 	b = ["test1", "test2", "test3"];
-	printTest("arrayCompare(): string arrays are not equal");	
-	assert( arrayCompare(a, b), false );
+	test.print("arrayCompare(): string arrays are not equal");	
+	test.assert( test.arrayCompare(a, b), false );
 	
 	a = [new SceneEntity(), new SceneEntity()];
 	b = a;
-	printTest("arrayCompare(): object arrays are equal");	
-	assert( arrayCompare(a, b, objectCompare), true );
+	test.print("arrayCompare(): object arrays are equal");	
+	test.assert( test.arrayCompare(a, b, test.objectCompare), true );
 	
-}
+};
 
-function testContainsCompare() {
+test.testContainsCompare = function() {
 	"use strict";
 	
 	var a = "test1";
 	var b = ["test1", "test2", "test3"];
 	
-	printTest("containsCompare(): element in array");	
-	assert( containsCompare(a, b), true );
+	test.print("containsCompare(): element in array");	
+	test.assert( test.containsCompare(a, b), true );
 	
 	a = "test4";
 	
-	printTest("containsCompare(): element not in array");	
-	assert( containsCompare(a, b), false );
+	test.print("containsCompare(): element not in array");	
+	test.assert( test.containsCompare(a, b), false );
 	
-	
-	
-}
+};
 
 
 // Test the utility.js package
-function testUtility() {
+test.utility = function() {
 	"use strict";
 	
-	hr();
+	test.printHR();
 	console.log("Testing utility.js\n");
 	console.log("");
 	
-	testUtilityReplaceWithRandomWords();
-	testAdlib();
-}
+	test.utilityReplaceWithRandomWords();
+	test.utilityAdlib();
+};
 
 
-function testUtilityReplaceWithRandomWords() {
+test.utilityReplaceWithRandomWords = function() {
 	"use strict";
-	printTest("replaceWithRandomWords(): Sentence word replacement");
+	test.print("replaceWithRandomWords(): Sentence word replacement");
 	
 	var sentence = "Testing a {0}, {1} sentence.";
 	var usedWords = [];
@@ -202,18 +204,18 @@ function testUtilityReplaceWithRandomWords() {
 	sentence = utility.replaceWithRandomWords(sentence, wordList1, 0, usedWords);
 	sentence = utility.replaceWithRandomWords(sentence, wordList2, 1, usedWords);	
 	
-	assert( sentence, "Testing a short, sample sentence." );
+	test.assert( sentence, "Testing a short, sample sentence." );
 	
-	printTest("replaceWithRandomWords(): Used word list updated");
+	test.print("replaceWithRandomWords(): Used word list updated");
 	
-	assert( usedWords, ["short", "sample"] , arrayCompare  );
+	test.assert( usedWords, ["short", "sample"] , test.arrayCompare  );
 	
-}
+};
 
-function testAdlib() {
+test.utilityAdlib = function() {
 	"use strict";
 	
-	printTest("adlib(): Sentence word replacement");
+	test.print("adlib(): Sentence word replacement");
 	
 	var sentence = "Testing a {0}, {1} sentence.";
 	var usedWords = ["small"];
@@ -224,52 +226,51 @@ function testAdlib() {
 	
 	sentence = utility.adlib( array, usedWords);
 	
-	assert( sentence, "Testing a short, sample sentence.  ");
+	test.assert( sentence, "Testing a short, sample sentence.  ");
 	
+	test.print("adlib(): Used word list updated");
+	test.assert( usedWords, ["small", "short", "sample"] , test.arrayCompare  );
 	
-	printTest("adlib(): Used word list updated");
-	assert( usedWords, ["small", "short", "sample"] , arrayCompare  );
-	
-}
+};
 
 
 // Test the control.js package
-function testControl() {
+test.control = function() {
 	"use strict";
 	
-	hr();
+	test.printHR();
 	console.log("Testing control.js\n");
 	console.log("");
 	
-	testControlSetChapter();
-	testControlPreviousChapter();
-	testControlNextChapter();
+	test.controlSetChapter();
+	test.controlPreviousChapter();
+	test.controlNextChapter();
 	
-}
+};
 
-function testControlSetChapter() {
+test.controlSetChapter = function() {
 	"use strict";
 	
-	printTest("setChapter(): displays the right chapter");
+	test.print("setChapter(): displays the right chapter");
 	
 	control.setChapter(2);
-	assert( control.currentChapter, 2);
-}
+	test.assert( control.currentChapter, 2);
+};
 
-function testControlPreviousChapter() {
+test.controlPreviousChapter = function() {
 	"use strict";
 	
-	printTest("previousChapter(): move to previous chapter");
+	test.print("previousChapter(): move to previous chapter");
 	control.previousChapter();
-	assert( control.currentChapter, 1);
+	test.assert( control.currentChapter, 1);
 	
-}
+};
 
-function testControlNextChapter() {
+test.controlNextChapter = function() {
 	"use strict";
 	
-	printTest("nextChapter(): move to next chapter");
+	test.print("nextChapter(): move to next chapter");
 	control.nextChapter();
-	assert( control.currentChapter, 2);
+	test.assert( control.currentChapter, 2);
 	
-}
+};

@@ -1,3 +1,7 @@
+/**
+ * @function
+ * @class This Object tracks the description of the setting
+ */ 
 $(document).ready(function() {
 	
 	//Set up the controls events for JQuery actions

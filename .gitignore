@@ -1,6 +1,5 @@
 # scripts #
 ################
 
-*.sh
-out
+*.bat
 .project
