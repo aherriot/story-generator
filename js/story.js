@@ -19,7 +19,7 @@ story.generateCharacters = function() {
 
 //Pick the setting for the story
 story.generateSetting = function() {
-	this.setting = new SettingObject();
+	this.setting = new Setting();
 }
 
 story.generate = function() {
@@ -38,9 +38,8 @@ story.generate = function() {
     //$(".chapterText").html("<p>"+ this.setting.initialDescription() +"</p>");
     
     $(".chapterText").eq(0).html("<p>"+ story.characters[0].toString() +"</p>");
-    $(".chapterText").eq(1).html("<p>2</p>");
-    $(".chapterText").eq(2).html("<p>3</p>");
-
+    $(".chapterText").eq(1).html("<p>"+ story.characters[1].toString() +"</p>");
+    $(".chapterText").eq(2).html("<p>"+ story.characters[2].toString() +"</p>");
 
 }
 

@@ -1,16 +1,16 @@
 //This class represents an object that is in the story
 // scene and can be interacted with.
 
-var StoryObject = function ( type, name) {
+var SceneEntity = function ( type, name) {
 	"use strict";
 	
-	var storyObjectNames = [ 
+	var sceneEntityNames = [ 
 	    ["couch", "armchair", "bar stool", "bean bag chair"], 
 	    ["pizza", "stir fry", "egg rolls", "moose sausage", "chocolate"], 
 	    ["slurpie", "milkshake", "beer", "martini", "chocolate milk"], 
 	    ["finger painting", "ASCII art", "sculpture", "performance art"] ];
 	
-	var storyObjectTypes = [ 
+	var sceneEntityTypes = [ 
 	    ["chair", "sits", "lounges", "lays", "relaxes"], 
 	    ["food", "eats", "demolishes", "pigs-out", "nibbles", "licks", "smell"],
 	    ["drink", "sips", "chugs", "drinks", "gulps", "gurgles"], 
@@ -19,8 +19,8 @@ var StoryObject = function ( type, name) {
 	
     if ( type === undefined ) {
     
-    	this.selection = randomIndex(storyObjectTypes);
-        this.type = storyObjectTypes[this.selection][0];
+    	this.selection = randomIndex(sceneEntityTypes);
+        this.type = sceneEntityTypes[this.selection][0];
         
     } else {
  
@@ -28,8 +28,8 @@ var StoryObject = function ( type, name) {
         
         //find if the type one from the list available.
         this.selection = -1;
-        for( i in storyObjectTypes ) {        	
-        	if ( storyObjectTypes[i][0] === type ) {
+        for( i in sceneEntityTypes ) {        	
+        	if ( sceneEntityTypes[i][0] === type ) {
         		this.selection = i;
         		break;
         	}
@@ -38,7 +38,7 @@ var StoryObject = function ( type, name) {
     
     //if the object name is not defined, then find one from the list.
     if ( name === undefined ) {
-        this.name = randomSelection( storyObjectNames[this.selection] );
+        this.name = randomSelection( sceneEntityNames[this.selection] );
     } else {
         this.name = name;
     }
@@ -48,7 +48,7 @@ var StoryObject = function ( type, name) {
     
 };
 
-StoryObject.prototype.toString = function() {
+SceneEntity.prototype.toString = function() {
 	
     var text = this.name + " (" + this.type + "): " 
     	+ this.descriptiveWords;

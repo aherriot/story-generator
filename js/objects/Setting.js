@@ -1,7 +1,7 @@
 // This Object tracks the description of the setting
 // and the storyObjects that are contained within the scene
 
-var SettingObject = function ( location ) {
+var Setting = function ( location ) {
 	"use strict";
 	
 	var locationNames = ["Castle", "Desert island hut"];
@@ -14,21 +14,14 @@ var SettingObject = function ( location ) {
     
     this.descriptiveWords = new Array();
 //    addWordToList(this.descriptiveWords, positiveAdjectives);
-//    addWordToList(this.descriptiveWords, negativeAdjectives);
-//    addWordToList(this.descriptiveWords, neutralAdjectives);
-//    addWordToList(this.descriptiveWords, visualAdjectives);
-//    addWordToList(this.descriptiveWords, shapeAdjectives);
-//    addWordToList(this.descriptiveWords, textureAdjectives);
-//    addWordToList(this.descriptiveWords, tasteAdjectives);
-//    addWordToList(this.descriptiveWords, smellAdjectives);
     
-    this.storyObjects = new Array();
-    this.storyObjects[0] = new StoryObject();
-    this.storyObjects[1] = new StoryObject();
+    this.sceneEntities = new Array();
+    this.sceneEntities[0] = new SceneEntity();
+    this.sceneEntities[1] = new SceneEntity();
     
 };
 
-SettingObject.prototype.toString = function() {
+Setting.prototype.toString = function() {
 	
     var text = this.name + " (" + this.type + "): " 
     	+ this.descriptiveWords;
@@ -37,13 +30,13 @@ SettingObject.prototype.toString = function() {
 
 };
 
-SettingObject.prototype.equals = function( other ) {
+Setting.prototype.equals = function( other ) {
 	
 	return ( this.location === other.location );
 
 };
 
-SettingObject.prototype.openingLine = function() {
+Setting.prototype.openingLine = function() {
 	
 	return adlib([ 
 	    ["It was a {0} and {1} night!", 
@@ -62,14 +55,14 @@ SettingObject.prototype.openingLine = function() {
 
 };
 
-SettingObject.prototype.visualDescription = function() {
+Setting.prototype.visualDescription = function() {
 	return "It looked nice.  ";
 	// The styling of the room was reminesciennt of a ___ ___.
 	// The decor could be described as ___ and ___.
 	// 
 }
 
-SettingObject.prototype.audioDescription = function() {
+Setting.prototype.audioDescription = function() {
 	return "It sounded quiet.  ";
 	// The faint sounds of ___ echoed throughout the room.
 	// The sound could best be described as __ and ____.
@@ -77,7 +70,7 @@ SettingObject.prototype.audioDescription = function() {
 	// The wisps of ____ and ___ were 
 }
 
-SettingObject.prototype.smellDescription = function() {
+Setting.prototype.smellDescription = function() {
 	
 	return adlib([ 
   	    ["The {0} room was filled with a {1} and {1} odour.", 
@@ -95,7 +88,7 @@ SettingObject.prototype.smellDescription = function() {
 	
 }
 
-SettingObject.prototype.initialDescription = function() {
+Setting.prototype.initialDescription = function() {
 	
 	var paragraph = this.openingLine();
 	
