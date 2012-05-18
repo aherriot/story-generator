@@ -3,20 +3,49 @@
 /**
  * story namespace
  * @namespace Contains functions that handle the creation of the objects.
+ * @property {Character} characters The characters in the story.
+ * @property {Setting} setting The setting for the story.
+ * 
  */
 var story = {};
 
-/** 
- * Array containing the character objects
- * @private
- * @type
+/**
+ * Appends a paragraph onto the end of the chapter text.
+ * @static
+ * @param {String} text The content to add.
  */
-story.characters = new Array();
+story.setStoryTitle = function( text ) {
+	$("#storyTitle").text( text );
+}
 
 /**
- * @function
+ * Appends a paragraph onto the end of the chapter text.
+ * @static
+ *  * @param {int} chapter The chapter to add text to.
+ * @param {String} text The content to add.
+ */
+story.setChapterTitle = function( chapter, text ) {
+	$(".chapterTitle").eq(chapter-1).text();
+}
+
+/**
+ * Appends a paragraph onto the end of the chapter text.
+ * @static
+ * @param {int} chapter The chapter to add text to.
+ * @param {String} text The content to add.
+ */
+story.addParagraph = function( chapter, text ) {
+	$(".chapterText").eq(chapter-1).append("<p>" + text + "</p>");
+}
+
+/**
+ * Generates the characters for the story based of the information
+ * collected in the form.
+ * @static
  */
 story.generateCharacters = function() {
+	
+	this.characters = new Array();
 	
 	for ( var i = 0; i < form.numberOfCharacters; i++ ) {
 			
@@ -27,42 +56,42 @@ story.generateCharacters = function() {
 	}	
 };
 
-
 /**
- * Pick the setting for the story.
- * @function
+ * Put the generated story into the HTML.
+ * @static 
  */
-story.generateSetting = function() {
-	this.setting = new Setting();
-};
-
-/**
- * @function
- */
-story.updateHTML = function() {
-	$("#storyTitle").text("The Adventure of " + this.characters[0].firstname
+story.display = function() {
+	
+	this.setStoryTitle("The Adventure of " + this.characters[0].firstname
     		+ " and " + this.characters[1].firstname );
 
-    $(".chapterTitle").eq(0).text( this.characters[0].firstname + " at the " 
+    this.setChapterTitle(1, this.characters[0].firstname + " at the " 
     		+ this.setting.location );
     
-
-    //$(".chapterText").html("<p>"+ this.setting.initialDescription() +"</p>");
+    //clear the story.
+    $(".chapterText").html("");
     
-    $(".chapterText").eq(0).html("<p>"+ story.characters[0].toString() +"</p>");
-    $(".chapterText").eq(1).html("<p>"+ story.characters[1].toString() +"</p>");
-    $(".chapterText").eq(2).html("<p>"+ story.characters[2].toString() +"</p>");
+    this.addParagraph( 1, this.setting.initialDescription() );
+    
+    this.addParagraph( 1, this.characters[0].toString() );
+    this.addParagraph( 1, this.characters[1].toString() );
+    this.addParagraph( 1, this.characters[2].toString() );
+    
+
 };
 
 /**
- * @function
+ * The main function to generate the story. 
+ * @static
  */
 story.generate = function() {
 
     this.generateCharacters();
-    this.generateSetting();
+    this.setting = new Setting();
     
-    this.updateHTML();
+    
+    
+    this.display();
    
 };
 

@@ -2,7 +2,7 @@
  * Creates a new Subject.
  * @class The details of a message.
  * @param {String} name The name of the subject matter.
- * @param {int} type What classification of subject is it?
+ * @param {Subject.type} type What classification of subject is it?
  * @param {Description} description How is it described?
  */ 
 var Subject = function( name, type, description ) {
@@ -12,11 +12,18 @@ var Subject = function( name, type, description ) {
 	this.description = discription;
 }
 
+/** 
+ * These are the type flags for the Subject objects
+ * used to indicate what classification of Subject it is.
+ * @namespace Subject type namespace.
+ */
+Subject.type = {};
+
 /** @constant */
-Subject.TYPE_BODY_PART = 0;
+Subject.type.BODY_PART = 0;
 /** @constant */
-Subject.TYPE_INTEREST = 1;
+Subject.type.INTEREST = 1;
 /** @constant */
-Subject.TYPE_ENTITY = 2;
+Subject.type.ENTITY = 2;
 /** @constant */
-Subject.TYPE_CHARACTER = 3;
+Subject.type.CHARACTER = 3;
