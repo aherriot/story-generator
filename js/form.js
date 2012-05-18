@@ -4,30 +4,46 @@
  */ 
 var form = {};
 
+/** @constant */
 form.FIRST_NAME_PROMPT = "First Name";
+/** @constant */
 form.NICKNAME_PROMPT = "Nickname";
+/** @constant */
 form.LAST_NAME_PROMPT = "Last Name";
 
+/** @constant */
 form.MAX_NUMBER_OF_CHARACTERS = 4;
 
+/** @static */
 form.numberOfCharacters = 3;
 
+/** @static */
 form.detailLevel = [0, 0, 0, 0];
+/** @static */
 form.gender = [0, 0, 0, 0];
+/** @static */
 form.firstname = ["", "", "", ""];
+/** @static */
 form.nickname = ["", "", "", ""];
+/** @static */
 form.lastname = ["", "", "", ""];
 
+/** @static */
 form.shyness = [5, 5, 5, 5];
+/** @static */
 form.selfishness = [5, 5, 5, 5];
-
+/** @static */
 form.relations = [[-1, 5, 5, 5],
                   [5, -1, 5, 5],
                   [5, 5, -1, 5],
                   [5, 5, 5, -1]];
 
 
-//Generates html for a select dropdown menu
+/** 
+ * Generates html for a select dropdown menu.
+ * @param {String} name The name of the select HTML element.
+ * @param {int} maxNumber The largest number of the drop down box.
+ */
 form.generateSelectText = function( name, maxNumber ) {
 	"use strict";
     
@@ -48,18 +64,21 @@ form.generateSelectText = function( name, maxNumber ) {
 }
 
 
-//Generates text for a like
-form.generateLikeRatingText = function( number ) {
+/** 
+ * Generates text for a like HTML input.
+ * @param {int} characterIndex The index number for the character.
+ */
+form.generateLikeRatingText = function( characterIndex ) {
 	"use strict";
 
     var ratingText = "";
     
     for ( var i = 0; i < this.MAX_NUMBER_OF_CHARACTERS; i++ ) {
         
-        if ( i !== number ) {
+        if ( i !== characterIndex ) {
             ratingText += '<div class="like'+i+'" >How much does ' 
-                + '<span class="name' + number + '" >' 
-                + this.getFirstName( number )
+                + '<span class="name' + characterIndex + '" >' 
+                + this.getFirstName( characterIndex )
                 + '</span>' 
                 + ' like <span class="name' + i +'" >' 
                 + this.getFirstName( i )
@@ -73,11 +92,14 @@ form.generateLikeRatingText = function( number ) {
 
 }
 
-// Get a string of the entire character name
-form.getFullName = function( number ) {
+/**
+ * Get a string of the entire character name.
+ * @param {int} characterIndex The index of the character in question.
+ */ 
+form.getFullName = function( characterIndex ) {
 	"use strict";
     
-    var textBox = $("input[name=firstname]").eq( number );
+    var textBox = $("input[name=firstname]").eq( characterIndex );
     var textBoxValue = textBox.val();
     var name = textBoxValue;
 
@@ -85,7 +107,7 @@ form.getFullName = function( number ) {
     if ( textBoxValue === this.FIRST_NAME_PROMPT 
          || textBoxValue === "" || textBoxValue === undefined )
         
-        return "Character " + numberName(number+1);
+        return "Character " + numberName(characterIndex+1);
     
     
     textBox = textBox.next();
@@ -107,19 +129,25 @@ form.getFullName = function( number ) {
     
 }
 
-// Returns the first name of the character
-form.getFirstName = function( number ) {
+/**
+ * Returns the first name of the character
+ * @param {int} characterIndex The index of the character in question.
+ */
+form.getFirstName = function( characterIndex ) {
 	"use strict";
     
-    var name = $("input[name=firstname]").eq( number ).val();
+    var name = $("input[name=firstname]").eq( characterIndex ).val();
     
     if ( name === this.FIRST_NAME_PROMPT || name === "" || name === undefined )
-        return "Character " + numberName(number+1);
+        return "Character " + numberName(characterIndex+1);
     else
         return name;   
 }
 
-
+/**
+ * Generates the text to edit the character in the form.
+ * @param {int} number The index of the character in question.
+ */
 form.generateCharacterFormText = function( number ) {
 	"use strict";
 	
@@ -168,12 +196,16 @@ form.generateCharacterFormText = function( number ) {
         '</div>' +
         '<br />' +
     
-    '</div>';
-                       
+    '</div>';          
          
     return characterForm;
 };
-                
+  
+/**
+ * Sets the prompt for the name text boxes if they are left empty.
+ * @param {String} textBoxName The name of the textbox.
+ * @param {String} promptString The text to be filled in.
+ */
 form.setTextBoxPromptEvent = function( textBoxName, promptString ) {
 	"use strict";
 
@@ -205,6 +237,10 @@ form.setTextBoxPromptEvent = function( textBoxName, promptString ) {
  
 }
 
+/**
+ * Check the form for errors and store the data in the local variables.
+ * @returns Returns true if there are no errors in the form data.
+ */
 form.validate = function() {
 	"use strict";
 	
@@ -248,7 +284,9 @@ form.validate = function() {
 }
 
 
-// Set the default values for variables and hides parts of the form.
+/**
+ * Set the default values for variables and hides parts of the form.
+ */
 form.initialize = function() {
 	"use strict";
 
@@ -274,11 +312,16 @@ form.initialize = function() {
     $("input[type=text][name=lastname]").val( this.LAST_NAME_PROMPT );
 }
 
-
+/**
+ * Sets up the events for when different form elements are changed.
+ */
 form.setUpEventHandlers = function(){
 	"use strict";
     
-    // Event for when a level of detail radio button is changed
+    /**
+     * @inner
+     * Event for when a level of detail radio button is changed.
+     */
     $(".detailLevel").change(function( event ) {
         
     	var detailLevel = parseInt( $(this).val() );
@@ -303,7 +346,10 @@ form.setUpEventHandlers = function(){
     });
 
 
-    // Event for when the number of characters changes
+    /**
+     * @inner
+     * Event for when the number of characters changes
+     */ 
     $("select[name=numberOfCharacters]").change( function(event) {
         
         this.numberOfCharacters = parseInt( $(this).val() );

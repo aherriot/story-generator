@@ -4,10 +4,13 @@
  * @namespace Contains many functions for generating random numbers,
  * selecting items from lists randomly, and for string manipulation.
  */ 
-
 var utility = {};
 
-// Returns a random integer in the range [0, max].
+/** 
+ * Returns a random integer in the range [0, max].
+ * @static 
+ * @param {int} max The maximum value for the integer.
+ */
 utility.randomInt = function( max ) {
 	"use strict";
     
@@ -15,22 +18,33 @@ utility.randomInt = function( max ) {
 
 };
 
-//Takes an list and returns one element at random
+/**
+ * Takes an list and returns one element at random.
+ * @static 
+ * @param {String[]} list The list of strings to choice from.
+ */
 utility.randomSelection = function( list ) {
 	"use strict";
 	
     return list[ this.randomInt( list.length - 1 ) ];
 };
 
-
-// Returns the index of an element from the list
+/**
+ * Returns the index of a random element from the list.
+ * @static 
+ * @param {String[]} list The list of strings to choice from.
+ */
 utility.randomIndex = function( list ) {
 	"use strict";
 	
     return this.randomInt( list.length - 1 );
 };
 
-//Randomizes the order of a list;
+/**
+ * Randomizes the order of a list.
+ * @static 
+ * @param {String[]} list The list of strings to choice from.
+ */
 utility.shuffle = function( list ) {
 	"use strict";
 	
@@ -38,7 +52,14 @@ utility.shuffle = function( list ) {
 };
 
 
-//Returns a random selection from the list not on alreadyUsed
+
+/**
+ * Returns a random selection from the list not on the alreadyUsed list.
+ * @static 
+ * @param {String[]} list The list of strings to choice from.
+ * @param {String[]} alreadyUsed The list of strings that are excluded
+ * from the selection.
+ */
 utility.randomUniqueSelection = function( list, alreadyUsed ) {
 	"use strict";
 
@@ -59,6 +80,11 @@ utility.randomUniqueSelection = function( list, alreadyUsed ) {
 };
 
 // Gets the index of an element of list, that isn't in alreadUsed
+/**
+ * Returns the index of a random element from the list.
+ * @static 
+ * @param {String[]} list The list of strings to choice from.
+ */
 utility.randomUniqueIndex = function( list, alreadyUsed ) {
 	"use strict";
 
@@ -68,15 +94,29 @@ utility.randomUniqueIndex = function( list, alreadyUsed ) {
 
 };
 
-// Adds a new element to the list from the list of possible choices
+
+/**
+ * Adds one new word to the list from the list of possible choices.
+ * @static
+ * @param {String[]} currentList The list of words already there.
+ * @param {String[]} possibleList The candidates that might be added.
+ */
 utility.addWordToList = function( currentList, possibleList ) {
 	"use strict";
 	
 	currentList.push( this.randomUniqueSelection( possibleList, currentList ) );
 };
 
-// replaces each instance of "{listNumber}" with a random word from
-// the corresponding list.
+/**
+ * Replaces each instance of {listNumber} with a selection from the list
+ * making sure that the words are not in the usedWords list.
+ * @static
+ * @param {String} string The sentence to be edited.
+ * @param {String[]} list The list of candidate words.
+ * @param {int} listNumber The number to look for.
+ * @param {String[]} usedWords The words that have already been used.
+ */
+
 utility.replaceWithRandomWords = function (string, list, listNumber, usedWords) {
 	"use strict";
 	
@@ -94,13 +134,19 @@ utility.replaceWithRandomWords = function (string, list, listNumber, usedWords) 
 	return string;
 };
 
-// Usage:
-
-// utility.adlib(
-//    [ [sentence1, [list1, list2, list3, ...] ], 
-//    [sentence2, [list1, list2, list3, ...] ],
-//    []...], usedWords
-//	);
+/**
+ * Injects sentences with words from the provided lists.
+ * @static
+ * @param {Array} array
+ * @param {String[]} usedWords The list of strings that are excluded
+ * from the selection.
+ * @example
+ * utility.adlib(
+ * 	[ [sentence1, [list1, list2, list3, ...] ], 
+ * 	[sentence2, [list1, list2, list3, ...] ],
+ * 	[]...], usedWords
+ * );
+ */
 utility.adlib = function( array, usedWords ) {
 	"use strict";
 	
