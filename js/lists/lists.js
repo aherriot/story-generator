@@ -1,15 +1,25 @@
 // Andrew Herriot, 2011
 
+/**
+ * @namespace Lists
+ */
+var lists = {};
+
+
 var numberName = function (n) { 
 	var names = ["Zero", "One", "Two", "Three", "Four", "Five", "Six",
 	    "Seven", "Eight", "Nine", "Ten"];
 	return names[n];
 };
 
-var MALE = 0;
-var FEMALE = 1;
 
-var genders = [MALE, FEMALE];
+/** @constant */
+lists.MALE = 0;
+/** @constant */
+lists.FEMALE = 1;
+
+
+var genders = [lists.MALE, lists.FEMALE];
 
 
 var maleNames = ["Cornelius", "William", "George", "Abraham", "Bartholomew", 

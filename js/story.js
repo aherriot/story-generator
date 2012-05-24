@@ -39,15 +39,23 @@ story.addParagraph = function( chapter, text ) {
 }
 
 /**
+ * Clears the story text from the paragraphs.
+ * @static
+ */
+story.clear = function() {
+    $(".chapterText").html("");
+}
+
+/**
  * Generates the characters for the story based of the information
  * collected in the form.
  * @static
  */
-story.generateCharacters = function() {
+story.createCharacters = function( numberOfCharacters ) {
 	
 	this.characters = new Array();
 	
-	for ( var i = 0; i < form.numberOfCharacters; i++ ) {
+	for ( var i = 0; i < numberOfCharacters; i++ ) {
 			
 		this.characters[i] = new Character( i, form.detailLevel[i], 
 			form.gender[i], form.firstname[i], form.nickname[i], 
@@ -61,34 +69,42 @@ story.generateCharacters = function() {
  * @static 
  */
 story.display = function() {
-	
-	this.setStoryTitle("The Adventure of " + this.characters[0].firstname
-    		+ " and " + this.characters[1].firstname );
 
     this.setChapterTitle(1, this.characters[0].firstname + " at the " 
     		+ this.setting.location );
     
-    //clear the story.
-    $(".chapterText").html("");
-    
-    this.addParagraph( 1, this.setting.initialDescription() );
-    
-    this.addParagraph( 1, this.characters[0].toString() );
+
     this.addParagraph( 1, this.characters[1].toString() );
     this.addParagraph( 1, this.characters[2].toString() );
     
-
 };
+
+/**
+ * Generates the text for the first chapter of the story.
+ * @static
+ */
+story.createChapter = function( currentChapter, lastChapters) {
+    this.addParagraph( 1, this.setting.initialDescription() );
+    
+    this.addParagraph( 1, this.characters[0].toString() );
+}
 
 /**
  * The main function to generate the story. 
  * @static
  */
-story.generate = function() {
+story.generate = function( numberOfCharacters ) {
+	
 
-    this.generateCharacters();
+	this.clear();
+    this.createCharacters( numberOfCharacters );
     this.setting = new Setting();
     
+	this.setStoryTitle("The Adventure of " + this.characters[0].firstname
+    		+ " and " + this.characters[1].firstname );
+    
+    
+	this.createChapter();
     
     
     this.display();

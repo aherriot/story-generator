@@ -7,7 +7,7 @@
  */ 
 
 var control = {};
-
+	
 control.currentChapter = 0;
 control.totalChapters = 3;
 
@@ -105,7 +105,7 @@ control.createStory = function () {
         // And then generate the new story and finally reveal it.
         whatToHide.slideUp( 1000, function() {
 
-            story.generate();
+            story.generate( form.numberOfCharacters );
 
             $("#story").slideDown( 1500 );
 

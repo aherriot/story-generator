@@ -7,6 +7,10 @@ var Description = function() {
 	
 };
 
+Description.prototype.getSmellDescription = function() {
+	
+};
+
 Description.prototype.addWord = function( word ) {
 	
 }

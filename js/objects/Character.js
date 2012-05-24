@@ -1,8 +1,18 @@
-// Character class
-
 /**
  * Creates a new Character.
  * @class Represents a Character. 
+ * @property {int} characterIndex
+ * @property {int} gender The gender.
+ * @property {String} firstname The first name.
+ * @property {String} nickname A nick name that the character is sometimes
+ * referred to as.
+ * @property {String} lastname The last name.
+ * @property {int} shyness How shy a character is on the interval [0, 10].
+ * @property {int} selfishness How selfish a character is on 
+ * the interval [0, 10].
+ * @property {int[]} relations An array on ints of how much this character
+ * likes other characters which each value on the interval [0, 10]. 
+ * 
  */ 
 var Character = function( characterIndex, detailLevel, 
 		gender, firstname, nickname, lastname, 
@@ -11,12 +21,12 @@ var Character = function( characterIndex, detailLevel,
 	
 	this.characterIndex = characterIndex;
 	
-	if ( detailLevel === 0 ) {
+	if (detailLevel === 0 ) {
 		
 		// generate name
 		this.gender = utility.randomSelection( genders );
         
-        if ( this.gender === MALE ) {
+        if (this.gender === lists.MALE ) {
 
             var choice = utility.randomUniqueIndex( maleNames, usedNames );
 
@@ -49,7 +59,7 @@ var Character = function( characterIndex, detailLevel,
 		
         this.gender = gender;
         
-        if ( this.gender === MALE) {        	
+        if (this.gender === lists.MALE) {        	
         	this.title = "Mr.";        	
         } else {        	
         	this.title = "Ms.";
@@ -107,8 +117,23 @@ var Character = function( characterIndex, detailLevel,
     
 };
 
-Character.prototype.getRelation = function( characterIndex ) {
+Character.prototype.getInitialDescription = function() {
 	
+}
+
+/**
+ * Opens the dialogue with the character of the given index
+ * @param {int} characterIndex The character of the other person.
+ * @returns {String} The output text.
+ */
+Character.prototype.startConversation = function( characterIndex ) {
+	if ( this.characterIndex === characterIndex )
+		return this.firstname + "begins talking to themselves.";
+	
+}
+
+Character.prototype.getRelation = function( characterIndex ) {
+	return this.relations[characterIndex];
 	
 };
 

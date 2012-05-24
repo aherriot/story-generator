@@ -1,10 +1,4 @@
 
-/**
- * Utility namespace
- * @namespace Contains many functions for generating random numbers,
- * selecting items from lists randomly, and for string manipulation.
- */ 
-var utility = {};
 
 /** 
  * Returns a random integer in the range [0, max].
