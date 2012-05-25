@@ -3,6 +3,7 @@ namespace.module('agherriot.story-generator.control',
 	"use strict";
 	
 	var form = require('agherriot.story-generator.form');
+	var story = require('agherriot.story-generator.story');
 	
 	exports.extend({
 		"setChapter": setChapter,

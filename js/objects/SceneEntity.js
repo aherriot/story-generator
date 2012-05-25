@@ -1,65 +1,69 @@
 
-/**
- * Creates a new SceneEntity.
- * @class This class represents an entity that is in the story
- * scene and can be interacted with.
- */ 
-var SceneEntity = function ( type, name) {
+
+namespace.module('agherriot.story-generator.objects', 
+	function (exports, require) {
 	"use strict";
 	
-	var sceneEntityNames = [ 
-	    ["couch", "armchair", "bar stool", "bean bag chair"], 
-	    ["pizza", "stir fry", "egg rolls", "moose sausage", "chocolate"], 
-	    ["slurpie", "milkshake", "beer", "martini", "chocolate milk"], 
-	    ["finger painting", "ASCII art", "sculpture", "performance art"] ];
+	var utility = require('agherriot.story-generator.utilities');
 	
-	var sceneEntityTypes = [ 
-	    ["chair", "sits", "lounges", "lays", "relaxes"], 
-	    ["food", "eats", "demolishes", "pigs-out", "nibbles", "licks", "smell"],
-	    ["drink", "sips", "chugs", "drinks", "gulps", "gurgles"], 
-	    ["art", "admires", "observes", "licks", "touches", "criticizes", "sniffs"] ];
-
+	exports.extend({
+		'SceneEntity': SceneEntity
+	});
 	
-    if ( type === undefined ) {
-    
-    	this.selection = utility.randomIndex(sceneEntityTypes);
-        this.type = sceneEntityTypes[this.selection][0];
-        
-    } else {
- 
-        this.type = type;
-        
-        //find if the type one from the list available.
-        this.selection = -1;
-        for( i in sceneEntityTypes ) {        	
-        	if ( sceneEntityTypes[i][0] === type ) {
-        		this.selection = i;
-        		break;
-        	}
-        }
-    }
-    
-    //if the object name is not defined, then find one from the list.
-    if ( name === undefined ) {
-        this.name = utility.randomSelection( sceneEntityNames[this.selection] );
-    } else {
-        this.name = name;
-    }
-
-    this.descriptiveWords = new Array();
-    utility.addWordToList(this.descriptiveWords, adjectives);
-    
-};
-
-SceneEntity.prototype.equals = function ( otherObject ) {
-	return  otherObject === this;
-}
-
-SceneEntity.prototype.toString = function() {
+	function SceneEntity(type, name) {
+		"use strict";
+		
+		var _type;
+		var _name;
+		var _selection;
+		
+		var sceneEntityNames = [ 
+		    ["couch", "armchair", "bar stool", "bean bag chair"], 
+		    ["pizza", "stir fry", "egg rolls", "moose sausage", "chocolate"], 
+		    ["slurpie", "milkshake", "beer", "martini", "chocolate milk"], 
+		    ["finger painting", "ASCII art", "sculpture", "performance art"] ];
+		
+		var sceneEntityTypes = [ 
+		    ["chair", "sits", "lounges", "lays", "relaxes"], 
+		    ["food", "eats", "demolishes", "pigs-out", "nibbles", "licks", "smell"],
+		    ["drink", "sips", "chugs", "drinks", "gulps", "gurgles"], 
+		    ["art", "admires", "observes", "licks", "touches", "criticizes", "sniffs"] ];
 	
-    var text = this.name + " (" + this.type + "): " 
-    	+ this.descriptiveWords;
-    
-    return text;
-
-};
+		
+		if ( type === undefined ) {
+		    
+	    	_selection = utility.randomIndex(sceneEntityTypes);
+	        _type = sceneEntityTypes[this.selection][0];
+	        
+	    } else {
+	 
+	        _type = type;
+	        
+	        //find if the type one from the list available.
+	        _selection = -1;
+	        for( i in sceneEntityTypes ) {        	
+	        	if ( sceneEntityTypes[i][0] === type ) {
+	        		_selection = i;
+	        		break;
+	        	}
+	        }
+	    }
+		
+		//If the object name is not defined, then find one from the list.
+	    if ( name === undefined ) {
+	        _name = utility.randomSelection( sceneEntityNames[_selection] );
+	    } else {
+	        _name = name;
+	    }
+	    //***********************************
+	    // end of constructor.
+	    
+	    this.toString = function() {
+	    	
+	    	return _name + " (" + _type + ")";
+	    };
+		
+		
+	}
+	
+});

@@ -33,7 +33,6 @@ namespace.module('agherriot.story-generator.objects',
 			return _subject;
 		};
 	}
-	 
 
 	/** 
 	 * These are the type flags for the {@link Message} objects
