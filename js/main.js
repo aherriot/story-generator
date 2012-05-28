@@ -8,7 +8,7 @@ namespace.module('agherriot.story-generator',
 	/**
 	 * @function This function initializes the page when it has loaded.
 	 */ 
-	$(document).ready(function() {
+	$(function() {
 		
 		//Set up the controls events for JQuery actions
 		control.initialize();

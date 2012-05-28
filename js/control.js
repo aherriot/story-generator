@@ -39,11 +39,10 @@ namespace.module('agherriot.story-generator.control',
 	function previousChapter() {
 	    
 	    if( currentChapter > 0 ) {
-	        
-	    	currentChapter = currentChapter;    	
-	        $(".chapter").eq( currentChapter ).fadeOut( function() {
-	        	$(".chapter").eq( currentChapter - 1 ).fadeIn();
-	        });  
+
+			$(".chapter").eq( currentChapter ).fadeOut( function() {
+				$(".chapter").eq( currentChapter - 1 ).fadeIn();
+			});  
 	        
 	        currentChapter--;
 	        
@@ -90,18 +89,18 @@ namespace.module('agherriot.story-generator.control',
 		
 		//Only if the form is valid, do we create a story
 	    if ( form.validate() ) {
-	    	
+
 	        //hide the disclaimer
 	        $("#disclaimer").slideUp();
 	        
 	        
 	        var whatToHide;
 	        
-	        if ( $("#options").is(":visible") ) {
-	            whatToHide = $("#options");
-	        } else {
-	        	 whatToHide = $("#story");
-	        }
+			if ( $("#options").is(":visible") ) {
+			    whatToHide = $("#options");
+			} else {
+				whatToHide = $("#story");
+			}
 	        
 	        // Hide either the story or the form, 
 	        // And then generate the new story and finally reveal it.
@@ -114,8 +113,8 @@ namespace.module('agherriot.story-generator.control',
 	            $("#edit").show();
 	            $("#create").text("Create New Story");
 
-	            control.currentChapter = 0;
-	            control.setChapter( control.currentChapter );
+	            currentChapter = 0;
+	            setChapter( currentChapter );
 	        });
 	    }   
 	}
@@ -123,39 +122,36 @@ namespace.module('agherriot.story-generator.control',
 	//Registers all the control events for JQuery
 	function initialize() {
 		
-		$(".previousChapter").click( {control: this}, function(event) {
+		$(".previousChapter").click( function(event) {
 	        
 	        event.preventDefault();
-	        event.data.control.previousChapter();  
+	        previousChapter();  
 	    
 	    });
 
-	    $(".nextChapter").click( {control: this}, function(event) {
-	        
-	        event.preventDefault();
-	        event.data.control.nextChapter();
-	        
-	    });    
+		$(".nextChapter").click( function(event) {
+		    
+		    event.preventDefault();
+		    nextChapter();
+		    
+		});    
 	     
 	    //The edit link is pressed
-	    $("#edit").click( {control: this}, function(event) {    
+	    $("#edit").click( function(event) {    
 	        
 	        event.preventDefault();
-	        event.data.control.editSettings();
+	        editSettings();
 
 	     });
 
 
-	    // generate story button is pressed
-	    $("#create").click( {control: this}, function(event) { 
-	    	
-	        event.preventDefault();
-	        event.data.control.createStory();
-	      
-	    });   	
+		// generate story button is pressed
+		$("#create").click( function(event) { 
+		
+		    event.preventDefault();
+		    createStory();
+		});
 	}
-	
-
 });
 		
 

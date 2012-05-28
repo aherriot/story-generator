@@ -17,7 +17,7 @@ namespace.module('agherriot.story-generator.objects',
 		
 		var _name = name;
 		var _type = type;
-		var _description = discription;
+		var _description = description;
 		
 		/** 
 		 * These are the type flags for the Subject objects

@@ -14,11 +14,11 @@ namespace.module('agherriot.story-generator.objects',
 	 */ 
 	function Description() {
 		
-		this.addWord = function() {
+		this.addWord = function () {
 			
 		};
 		
-		this.getSmellDescription = function() {
+		this.getSmellDescription = function () {
 			
 		};
 	}

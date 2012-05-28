@@ -11,6 +11,9 @@ namespace.module('agherriot.story-generator.story',
 	function (exports, require) {
 	"use strict";
 	
+	var objects = require('agherriot.story-generator.objects');
+	var form = require('agherriot.story-generator.form');
+	
 	exports.extend({
 		'generate': generate
 	});
@@ -62,11 +65,11 @@ namespace.module('agherriot.story-generator.story',
 	 */
 	function createCharacters( numberOfCharacters ) {
 		
-		characters = new Array();
+		characters = [];
 		
 		for ( var i = 0; i < numberOfCharacters; i++ ) {
 				
-			characters[i] = new Character( i, form.detailLevel[i], 
+			characters[i] = new objects.Character( i, form.detailLevel[i], 
 				form.gender[i], form.firstname[i], form.nickname[i], 
 				form.lastname[i], form.shyness[i], form.selfishness[i],
 				form.relations[i]);
@@ -79,8 +82,8 @@ namespace.module('agherriot.story-generator.story',
 	 */
 	function display() {
 
-	    setChapterTitle(1, characters[0].firstname + " at the " 
-	    		+ setting.location );
+		setChapterTitle(1, characters[0].firstname + " at the " + 
+			setting.location );
 	    
 
 	    addParagraph( 1, characters[1].toString() );
@@ -106,10 +109,10 @@ namespace.module('agherriot.story-generator.story',
 		
 		clear();
 	    createCharacters( numberOfCharacters );
-	    setting = new Setting();
+	    setting = new objects.Setting();
 	    
-		setStoryTitle("The Adventure of " + characters[0].firstname
-	    		+ " and " + characters[1].firstname );
+		setStoryTitle("The Adventure of " + characters[0].firstname + 
+			" and " + characters[1].firstname );
 	    
 	    
 		createChapter(); 

@@ -1,161 +1,192 @@
 /**
  * Creates a new Character.
- * @class Represents a Character. 
+ * 
+ * @class Represents a Character.
  * @property {int} characterIndex
  * @property {int} gender The gender.
  * @property {String} firstname The first name.
  * @property {String} nickname A nick name that the character is sometimes
- * referred to as.
+ *           referred to as.
  * @property {String} lastname The last name.
  * @property {int} shyness How shy a character is on the interval [0, 10].
- * @property {int} selfishness How selfish a character is on 
- * the interval [0, 10].
- * @property {int[]} relations An array on ints of how much this character
- * likes other characters which each value on the interval [0, 10]. 
+ * @property {int} selfishness How selfish a character is on the interval [0,
+ *           10].
+ * @property {int[]} relations An array on ints of how much this character likes
+ *           other characters which each value on the interval [0, 10].
  * 
  */ 
-var Character = function( characterIndex, detailLevel, 
-		gender, firstname, nickname, lastname, 
-		shyness, selfishness, relations ) {
+
+namespace.module('agherriot.story-generator.objects', 
+	function (exports, require) {
 	"use strict";
 	
-	this.characterIndex = characterIndex;
+	var utility = require('agherriot.story-generator.utilities');
+	var lists = require('agherriot.story-generator.lists');
+	var form = require('agherriot.story-generator.form');
 	
-	if (detailLevel === 0 ) {
-		
-		// generate name
-		this.gender = utility.randomSelection( genders );
-        
-        if (this.gender === lists.MALE ) {
-
-            var choice = utility.randomUniqueIndex( maleNames, usedNames );
-
-            this.firstname = maleNames[choice];
-            this.nickname = maleNicknames[choice];
-            
-            this.title = "Mr.";
-
-            this.lastname = utility.randomUniqueSelection( lastNames, usedLastNames );
-
-            usedNames.push( this.firstname );
-            usedLastNames.push( this.lastname );
-
-        }  else {
-
-            var choice = utility.randomUniqueIndex( femaleNames, usedNames );
-
-            this.firstname = femaleNames[choice];
-            this.nickname = femaleNicknames[choice];
-
-            this.lastname = utility.randomUniqueSelection( lastNames, usedLastNames );
-
-            this.title = "Ms.";
-
-            usedNames.push( this.firstname );
-            usedLastNames.push( this.lastname );
-        }
-		
-	} else {
-		
-        this.gender = gender;
-        
-        if (this.gender === lists.MALE) {        	
-        	this.title = "Mr.";        	
-        } else {        	
-        	this.title = "Ms.";
-        }
-        
-        this.firstname = firstname;
-        this.nickname = nickname;
-        this.lastname = lastname;
-        
-        usedNames.push( this.firstname );
-        usedLastNames.push( this.lastname );
-	}
+	exports.extend({
+		'Character': Character
+	});
 	
-	if ( detailLevel === 0 || detailLevel === 1 ) {
+	function Character (characterIndex, detailLevel, 
+			gender, firstname, nickname, lastname, 
+			shyness, selfishness, relations) {
 		
-        this.shyness = utility.randomInt( 10 );
-        this.selfishness = utility.randomInt( 10 );
-		//this.relations = relations;
+		var _characterIndex = characterIndex;
+		var _gender = gender;
+		var _title;
+		var _firstname = firstname;
+		var _nickname = nickname;
+		var _lastname = lastname;
+		var _shyness = shyness;
+		var _selfishness = selfishness;
+		var _relations = [];
+		var _interests = [];
+		var _disinterests = [];
 		
-	    // Add relationships
-	    this.relations = new Array();
-
-	    //set the relationship values
-	    for ( var i = 0; i < form.numberOfCharacters; i++ ) {
-	    	
-	    	if ( i !== this.characterIndex ) {
-	    		this.relations.push( utility.randomInt( 10 ) );
-	    	} else {
-	    		this.relations.push( -1 );
-	    	}
-	    }
+		var choice, i;
 		
-	} else {
-		
-    	this.shyness = shyness;
-		this.selfishness = selfishness;
-		
-		for( var i = 0; i < form.numberOfCharacters; i++) {
+		if (detailLevel === 0) {
 			
-			this.relations.push( relations[characterIndex][i] );
+			// generate name
+			_gender = utility.randomSelection( lists.genders );
+	        
+			if (_gender === lists.MALE ) {
+			
+				choice = utility.randomUniqueIndex( lists.maleNames, 
+					lists.usedNames );
+
+	            _firstname = lists.maleNames[choice];
+	            _nickname = lists.maleNicknames[choice];
+	            
+	            _title = lists.TITLE_MALE;
+
+				_lastname = utility.randomUniqueSelection( lists.lastNames, 
+						lists.usedLastNames );
+
+	            lists.usedNames.push( _firstname );
+	            lists.usedLastNames.push( _lastname );
+
+	        }  else {
+
+				choice = utility.randomUniqueIndex( lists.femaleNames, 
+					lists.usedNames );
+
+	            _firstname = lists.femaleNames[choice];
+	            _nickname = lists.femaleNicknames[choice];
+
+				_lastname = utility.randomUniqueSelection( lists.lastNames, 
+					lists.usedLastNames );
+
+	            _title = lists.TITLE_FEMALE;
+
+	            lists.usedNames.push( _firstname );
+	            lists.usedLastNames.push( _lastname );
+	        }
+			
+		} else {
+			
+	        _gender = gender;
+
+			if (_gender === lists.MALE) {
+				_title = lists.TITLE_MALE;
+			} else {
+				_title = lists.TITLE_MALE;
+			}
+
+	        _firstname = firstname;
+	        _nickname = nickname;
+	        _lastname = lastname;
+	        
+	        lists.usedNames.push( _firstname );
+	        lists.usedLastNames.push( _lastname );
 		}
 		
-	}        
+		if ( detailLevel === 0 || detailLevel === 1 ) {
+			
+	        _shyness = utility.randomInt( 10 );
+	        _selfishness = utility.randomInt( 10 );
 
-	//regardless of the above info, pick some topics of interest
+			// set the relationship values
+			for ( i = 0; i < form.getNumberOfCharacters(); i++ ) {
+				
+				if ( i !== this.characterIndex ) {
+					this.relations.push( utility.randomInt( 10 ) );
+				} else {
+					this.relations.push( -1 );
+				}
+			}
+			
+		} else {
+			
+			_shyness = shyness;
+			_selfishness = selfishness;
+			
+			for( i = 0; i < form.getNumberOfCharacters(); i++) {
+				
+				this.relations.push( relations[characterIndex][i] );
+			}
+			
+		}        
+
+		// regardless of the above info, pick some topics of interest
+		
+	    // pick some interests
+		_interests.push( utility.randomUniqueSelection( lists.interests, 
+			_interests ) );
+
+		// pick some disinterests
+		_disinterests.push( utility.randomUniqueSelection( lists.interests, 
+				_disinterests.concat( _interests )) );	
+	    
+	    
+	    // **********************
+	    // End of Constructor
+	    
+
+	    this.getInitialDescription = function() {
+
+	    };
+
+	    /**
+	     * Opens the dialogue with the character of the given index
+	     * 
+	     * @param {int}
+	     *            characterIndex The character of the other person.
+	     * @returns {String} The output text.
+	     */
+	    this.startConversation = function( characterIndex ) {
+			if (_characterIndex === characterIndex )
+				return _firstname + "begins talking to themselves.";	
+	    };
+
+	    this.getRelation = function( characterIndex ) {
+			return this.relations[characterIndex];
+	    };
+
+	    this.toString = function () {
+	            
+	        var string =  _firstname + " (" + _nickname + ") " +
+	            _lastname + " <br />" +
+	            "Shyness: " + _shyness + "<br />" +
+	            "Selfishness: " + _selfishness + "<br />" +
+	            "Interests: " + _interests + "<br />" +
+	            "Disinterests: " + _disinterests + "<br />" +
+	            "Relations: <br />";
+
+	        for ( var i in this.relations ) {
+
+	            if ( _characterIndex != i ) {
+					string += "&nbsp;&nbsp;&nbsp;&nbsp;" + 
+						_firstname + ": " +
+						_relations[i] + "<br />";
+	            }
+
+	        }
+
+	        return string;
+	    };
+	    
+	}
 	
-	
-    //pick some interests
-    this.interests = new Array();
-    this.interests.push( utility.randomUniqueSelection( interests, this.interests ) );
-
-    //pick some disinterests
-    this.disinterests = new Array();
-    this.disinterests.push( utility.randomUniqueSelection( interests, this.disinterests.concat( this.interests )) );
-    
-};
-
-Character.prototype.getInitialDescription = function() {
-	
-}
-
-/**
- * Opens the dialogue with the character of the given index
- * @param {int} characterIndex The character of the other person.
- * @returns {String} The output text.
- */
-Character.prototype.startConversation = function( characterIndex ) {
-	if ( this.characterIndex === characterIndex )
-		return this.firstname + "begins talking to themselves.";
-	
-}
-
-Character.prototype.getRelation = function( characterIndex ) {
-	return this.relations[characterIndex];
-	
-};
-
-Character.prototype.toString = function () {
-        
-    var string =  this.firstname + " (" + this.nickname + ") "
-        + this.lastname + " <br />"
-        + "Shyness: " + this.shyness + "<br />"
-        + "Selfishness: " + this.selfishness + "<br />"
-        + "Interests: " + this.interests + "<br />"
-        + "Disinterests: " + this.disinterests + "<br />"
-        + "Relations: <br />";
-
-    for ( i in this.relations ) {
-
-        if ( this.characterIndex != i )
-            string += "&nbsp;&nbsp;&nbsp;&nbsp;" + story.characters[i].firstname + ": "
-            + this.relations[i] + "<br />";
-
-    }
-
-    return string;
-};
-
-
+});

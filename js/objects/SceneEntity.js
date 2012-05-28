@@ -11,7 +11,6 @@ namespace.module('agherriot.story-generator.objects',
 	});
 	
 	function SceneEntity(type, name) {
-		"use strict";
 		
 		var _type;
 		var _name;
@@ -32,7 +31,7 @@ namespace.module('agherriot.story-generator.objects',
 		
 		if ( type === undefined ) {
 		    
-	    	_selection = utility.randomIndex(sceneEntityTypes);
+			_selection = utility.randomIndex(sceneEntityTypes);
 	        _type = sceneEntityTypes[this.selection][0];
 	        
 	    } else {
@@ -41,12 +40,12 @@ namespace.module('agherriot.story-generator.objects',
 	        
 	        //find if the type one from the list available.
 	        _selection = -1;
-	        for( i in sceneEntityTypes ) {        	
-	        	if ( sceneEntityTypes[i][0] === type ) {
-	        		_selection = i;
-	        		break;
-	        	}
-	        }
+	        for(var i = 0; i < sceneEntityTypes.length; i++) {	
+				if ( sceneEntityTypes[i][0] === type ) {
+					_selection = i;
+					break;
+				}
+			}
 	    }
 		
 		//If the object name is not defined, then find one from the list.
@@ -58,10 +57,9 @@ namespace.module('agherriot.story-generator.objects',
 	    //***********************************
 	    // end of constructor.
 	    
-	    this.toString = function() {
-	    	
-	    	return _name + " (" + _type + ")";
-	    };
+		this.toString = function() {
+			return _name + " (" + _type + ")";
+		};
 		
 		
 	}

@@ -20,7 +20,6 @@ namespace.module('agherriot.story-generator.utilities',
 	 * @param {int} max The maximum value for the integer.
 	 */
 	function randomInt(max) {
-		"use strict";
 	    
 		return Math.floor(Math.random() * (max + 1));
 	}
@@ -31,9 +30,8 @@ namespace.module('agherriot.story-generator.utilities',
 	 * @param {String[]} list The list of strings to choice from.
 	 */
 	function randomSelection(list) {
-		"use strict";
 		
-	    return list[ this.randomInt(list.length - 1) ];
+	    return list[ randomInt(list.length-1) ];
 	}
 	
 	/**
@@ -42,9 +40,8 @@ namespace.module('agherriot.story-generator.utilities',
 	 * @param {String[]} list The list of strings to choice from.
 	 */
 	function randomIndex(list) {
-		"use strict";
 		
-	    return this.randomInt(list.length - 1);
+	    return randomInt(list.length - 1);
 	}
 	
 	/**
@@ -53,9 +50,10 @@ namespace.module('agherriot.story-generator.utilities',
 	 * @param {String[]} list The list of strings to choice from.
 	 */
 	function shuffle(list) {
-		"use strict";
-		
-		return list.sort(function() { return Math.random() - 0.5 });
+	
+		return list.sort( function() { 
+			return Math.random() - 0.5;
+		});
 	}
 	
 	
@@ -67,7 +65,6 @@ namespace.module('agherriot.story-generator.utilities',
 	 * from the selection.
 	 */
 	function randomUniqueSelection(list, alreadyUsed) {
-		"use strict";
 
 	    var newList = list.slice();
 
@@ -78,7 +75,7 @@ namespace.module('agherriot.story-generator.utilities',
 	            newList.splice(index, 1);
 	        }
 	    }
-	    return this.randomSelection(newList);
+	    return randomSelection(newList);
 	}
 	
 	/**
@@ -87,9 +84,8 @@ namespace.module('agherriot.story-generator.utilities',
 	 * @param {String[]} list The list of strings to choice from.
 	 */
 	function randomUniqueIndex(list, alreadyUsed) {
-		"use strict";
 
-	    var selection = this.randomUniqueSelection(list, alreadyUsed);
+	    var selection = randomUniqueSelection(list, alreadyUsed);
 	    
 	    return list.indexOf(selection);
 	}
@@ -101,9 +97,8 @@ namespace.module('agherriot.story-generator.utilities',
 	 * @param {String[]} possibleList The candidates that might be added.
 	 */
 	function addWordToList(currentList, possibleList) {
-		"use strict";
 		
-		currentList.push( this.randomUniqueSelection(possibleList, currentList));
+		currentList.push( randomUniqueSelection(possibleList, currentList));
 	}
 	
 	/**
@@ -116,13 +111,12 @@ namespace.module('agherriot.story-generator.utilities',
 	 * @param {String[]} usedWords The words that have already been used.
 	 */
 	function replaceWithRandomWords(string, list, listNumber, usedWords) {
-		"use strict";
 		
 		if (list !== undefined) {
 			
 			while (string.indexOf("{" + listNumber + "}") >= 0) {
 				
-				var word = this.randomUniqueSelection(list, usedWords);
+				var word = randomUniqueSelection(list, usedWords);
 				usedWords.push(word);
 				
 				string = string.replace("{" + listNumber + "}", word);
@@ -139,25 +133,24 @@ namespace.module('agherriot.story-generator.utilities',
 	 * from the selection.
 	 * @example
 	 * utility.adlib(
-	 * 	[ [sentence1, [list1, list2, list3, ...] ], 
-	 * 	[sentence2, [list1, list2, list3, ...] ],
-	 * 	[]...], usedWords
+	 * [ [sentence1, [list1, list2, list3, ...] ], 
+	 * [sentence2, [list1, list2, list3, ...] ],
+	 * []...], usedWords
 	 *);
 	 */
 	function adlib(array, usedWords) {
-		"use strict";
 		
 		if (usedWords === undefined) {
-			var usedWords = [];
+			usedWords = [];
 		}
 		
-		var choice = this.randomInt(array.length - 1);
+		var choice = randomInt(array.length - 1);
 		var string = array[choice][0];
 
 		var wordLists = array[choice][1];
 		
 		for(var i in array[choice][1]) {
-			string = this.replaceWithRandomWords(string, wordLists[i], i, usedWords);	
+			string = replaceWithRandomWords(string, wordLists[i], i, usedWords);	
 		}		
 		return string + "  ";
 	}

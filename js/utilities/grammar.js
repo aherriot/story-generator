@@ -6,6 +6,8 @@ namespace.module('agherriot.story-generator.utilities',
 	function (exports, require) {
 	"use strict";
 	
+	var lists = require('agherriot.story-generator.lists');
+	
 	exports.extend({
 		"getHeShe": getHeShe,
 		"getHimHer": getHimHer,
@@ -19,7 +21,7 @@ namespace.module('agherriot.story-generator.utilities',
 	    } else if ( gender === lists.FEMALE ) {
 			return "she";
 		} else {
-			console.log("ERROR: received incorrect gender parameter.")
+			console.error("Received incorrect gender parameter.");
 			return "ERROR";
 		}
 	}
@@ -31,7 +33,7 @@ namespace.module('agherriot.story-generator.utilities',
 	    } else if ( gender === lists.FEMALE ) {
 			return "her";
 		} else {
-			console.log("ERROR: received incorrect gender parameter.")
+			console.error("Received incorrect gender parameter.");
 			return "ERROR";
 		}
 	}
@@ -43,7 +45,7 @@ namespace.module('agherriot.story-generator.utilities',
 	    } else if ( gender === lists.FEMALE ) {
 			return "hers";
 		} else {
-			console.log("ERROR: received incorrect gender parameter.")
+			console.error("Received incorrect gender parameter.");
 			return "ERROR";
 		}
 	}
