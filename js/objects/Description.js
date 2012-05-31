@@ -21,6 +21,10 @@ namespace.module('agherriot.story-generator.objects',
 		this.getSmellDescription = function () {
 			
 		};
+		
+		this.equals = function(other) {
+			return this.constructor === other.constructor;
+		};
 	}
 	
 });

@@ -36,9 +36,9 @@ namespace.module('agherriot.story-generator.objects',
 
 		_sceneEntities[0] = new objects.SceneEntity();
 		_sceneEntities[1] = new objects.SceneEntity();
-
-		this.toString = function() {
-			return "World: " + _location;
+		
+		this.getLocation = function() {
+			return _location;
 		};
 
 		this.openingLine = function() {
@@ -112,6 +112,15 @@ namespace.module('agherriot.story-generator.objects',
 
 			return paragraph;
 
+		};
+		
+		this.equals = function(other) {
+			return this.constructor === other.constructor &&
+				_location === other.getLocation();
+		};	
+		
+		this.toString = function() {
+			return "World: " + _location;
 		};
 
 	}

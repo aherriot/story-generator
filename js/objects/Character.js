@@ -171,6 +171,11 @@ namespace.module('agherriot.story-generator.objects',
 	    this.getRelation = function( characterIndex ) {
 			return this.relations[characterIndex];
 	    };
+	    
+		this.equals = function(other) {
+			return this.constructor === other.constructor &&
+				_firstname === other.getFirstname();
+		};
 
 	    this.toString = function () {
 	            

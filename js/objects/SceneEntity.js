@@ -57,6 +57,20 @@ namespace.module('agherriot.story-generator.objects',
 	    //***********************************
 	    // end of constructor.
 	    
+		this.getType = function() {
+			return _type;
+		};
+		
+		this.getName = function() {
+			return _name;
+		};
+	    
+		this.equals = function(other) {
+			return this.constructor === other.constructor &&
+				_type === other.getType() &&
+				_name == other.getName();
+		};
+	    
 		this.toString = function() {
 			return _name + " (" + _type + ")";
 		};
