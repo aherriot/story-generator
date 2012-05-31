@@ -149,10 +149,14 @@ namespace.module('agherriot.story-generator.utilities',
 
 		var wordLists = array[choice][1];
 		
+		if( string === undefined || wordLists === undefined) {
+			console.error("Adlib() was not formatted correctly.");
+		}
+		
 		for(var i in array[choice][1]) {
 			string = replaceWithRandomWords(string, wordLists[i], i, usedWords);	
 		}		
-		return string + "  ";
+		return string + "&nbsp;&nbsp;";
 	}
 });
 

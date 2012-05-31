@@ -7,6 +7,7 @@ namespace.module('agherriot.story-generator.control',
 	
 	exports.extend({
 		"setChapter": setChapter,
+		"getCurrentChapter": getCurrentChapter,
 		"previousChapter": previousChapter,
 		"nextChapter": nextChapter,
 		"editSettings": editSettings,
@@ -16,6 +17,10 @@ namespace.module('agherriot.story-generator.control',
 	
 	var currentChapter = 0;
 	var totalChapters = 3;
+	
+	function getCurrentChapter() {
+		return currentChapter;
+	}
 	
 	//Set the chapter to be displayed (often used to display the first chapter).
 	function setChapter(number) {
@@ -71,6 +76,7 @@ namespace.module('agherriot.story-generator.control',
 	        $(".previousChapter").show();
 	    }
 	}
+	
 	
 	function editSettings() {
 		$("#disclaimer").slideUp();

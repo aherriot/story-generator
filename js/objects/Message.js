@@ -32,6 +32,12 @@ namespace.module('agherriot.story-generator.objects',
 		this.getSubject = function() {
 			return _subject;
 		};
+		
+		this.equals = function(other) {
+			return this.constructor === other.constructor &&
+				_type === other.getType() &&
+				_subject.equals(other.getSubject());
+		};
 	}
 
 	/** 

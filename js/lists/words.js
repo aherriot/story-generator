@@ -41,6 +41,7 @@ namespace.module('agherriot.story-generator.lists',
 
     var audioAdjectives = [ "harsh", "loud", "quiet" ];
     var audioNouns = ["bang", "bark"];
+    var audioVerbs = ["echoed"];
 
     var tasteAdjectives = ["bitter", "salty", "savoury", "smooth", "sour", 
          "sugary", "sweet"];
@@ -72,6 +73,7 @@ namespace.module('agherriot.story-generator.lists',
 		
 		'audioAdjectives': audioAdjectives,
 		'audioNouns': audioNouns,
+		'audioVerbs': audioVerbs,
 		
 		'tasteAdjectives': tasteAdjectives,
 		'tasteNouns': tasteNouns,

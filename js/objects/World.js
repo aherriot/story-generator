@@ -51,24 +51,30 @@ namespace.module('agherriot.story-generator.objects',
 
 				["All was {0} in the " + _location + ", even the weather" +
 				 " was {1}.",
-					[ lists.audioAdjectives, lists.positiveAdjectives ] ],
-
-				[ lists.usedWords ]
+					[ lists.audioAdjectives, lists.positiveAdjectives ] ]
+				], [ lists.usedWords ]);
 			// there live a ___
 			// along time ago.
-			]);
+			
 		};
 
 		this.visualDescription = function() {
 			return "It looked nice.  ";
-			// The styling of the room was reminesciennt of a
+			// The styling of the room was reminescient of a
 			// ___ ___.
 			// The decor could be described as ___ and ___.
-			// 
+			
 		};
 
 		this.audioDescription = function() {
-			return "It sounded quiet.  ";
+			//return "It sounded quiet.  ";
+			
+			return utility.adlib([
+			    ["The {0} sounds of a {1} {2} throughout the room.",
+			     [lists.audioAdjectives, lists.audioNouns, lists.audioVerbs]],
+			    ["The sound could best be described as {0} and {0}",
+			     lists.audioAdjectives] 
+			]);
 			// The faint sounds of ___ echoed throughout the
 			// room.
 			// The sound could best be described as __ and ____.

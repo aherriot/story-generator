@@ -260,7 +260,7 @@ namespace.module('agherriot.story-generator.testing',
 			print("setChapter(): displays the right chapter");
 			
 			control.setChapter(2);
-			assert( control.currentChapter, 2);
+			assert( control.getCurrentChapter(), 2);
 		}
 
 		function controlPreviousChapter() {
@@ -268,7 +268,7 @@ namespace.module('agherriot.story-generator.testing',
 			
 			print("previousChapter(): move to previous chapter");
 			control.previousChapter();
-			assert( control.currentChapter, 1);
+			assert( control.getCurrentChapter(), 1);
 			
 		}
 
@@ -277,7 +277,7 @@ namespace.module('agherriot.story-generator.testing',
 			
 			print("nextChapter(): move to next chapter");
 			control.nextChapter();
-			assert( control.currentChapter, 2);
+			assert( control.getCurrentChapter(), 2);
 			
 		}
 
