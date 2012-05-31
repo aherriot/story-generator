@@ -26,6 +26,7 @@ namespace.module('agherriot.story-generator.objects',
 	
 	exports.extend({
 		'Character': Character
+		
 	});
 	
 	function Character (characterIndex, detailLevel, 
@@ -48,10 +49,11 @@ namespace.module('agherriot.story-generator.objects',
 		
 		if (detailLevel === 0) {
 			
+			//console.log(lists);
 			// generate name
 			_gender = utility.randomSelection( lists.genders );
 	        
-			if (_gender === lists.MALE ) {
+			if ( _gender === lists.MALE ) {
 			
 				choice = utility.randomUniqueIndex( lists.maleNames, 
 					lists.usedNames );
@@ -64,7 +66,8 @@ namespace.module('agherriot.story-generator.objects',
 				_lastname = utility.randomUniqueSelection( lists.lastNames, 
 						lists.usedLastNames );
 
-	            lists.usedNames.push( _firstname );
+	            lists.usedFirstnames.push( _firstname );
+	            lists.usedNicknames.push( _nickname );
 	            lists.usedLastNames.push( _lastname );
 
 	        }  else {
@@ -75,13 +78,14 @@ namespace.module('agherriot.story-generator.objects',
 	            _firstname = lists.femaleNames[choice];
 	            _nickname = lists.femaleNicknames[choice];
 
-				_lastname = utility.randomUniqueSelection( lists.lastNames, 
-					lists.usedLastNames );
+				_lastname = utility.randomUniqueSelection( lists.lastnames, 
+					lists.usedLastnames );
 
 	            _title = lists.TITLE_FEMALE;
 
-	            lists.usedNames.push( _firstname );
-	            lists.usedLastNames.push( _lastname );
+	            lists.usedFirstnames.push( _firstname );
+	            lists.usedNicknames.push( _nickname );
+	            lists.usedLastnames.push( _lastname );
 	        }
 			
 		} else {
@@ -110,10 +114,10 @@ namespace.module('agherriot.story-generator.objects',
 			// set the relationship values
 			for ( i = 0; i < form.getNumberOfCharacters(); i++ ) {
 				
-				if ( i !== this.characterIndex ) {
-					this.relations.push( utility.randomInt( 10 ) );
+				if ( i !== _characterIndex ) {
+					_relations.push( utility.randomInt( 10 ) );
 				} else {
-					this.relations.push( -1 );
+					_relations.push( -1 );
 				}
 			}
 			
@@ -124,7 +128,7 @@ namespace.module('agherriot.story-generator.objects',
 			
 			for( i = 0; i < form.getNumberOfCharacters(); i++) {
 				
-				this.relations.push( relations[characterIndex][i] );
+				_relations.push( relations[characterIndex][i] );
 			}
 			
 		}        
@@ -144,9 +148,9 @@ namespace.module('agherriot.story-generator.objects',
 	    // End of Constructor
 	    
 
-	    this.getInitialDescription = function() {
-
-	    };
+		this.getInitialDescription = function() {
+			return "Charater's initial description";
+		};
 
 	    /**
 	     * Opens the dialogue with the character of the given index
@@ -159,6 +163,10 @@ namespace.module('agherriot.story-generator.objects',
 			if (_characterIndex === characterIndex )
 				return _firstname + "begins talking to themselves.";	
 	    };
+	    
+		this.getFirstname = function() {
+			return _firstname;
+		};
 
 	    this.getRelation = function( characterIndex ) {
 			return this.relations[characterIndex];

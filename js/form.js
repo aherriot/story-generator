@@ -10,6 +10,7 @@ namespace.module('agherriot.story-generator.form',
 
 	exports.extend({
 		'getNumberOfCharacters' : getNumberOfCharacters,
+		'getFormData': getFormData,
 		'initialize' : initialize,
 		'setUpEventHandlers' : setUpEventHandlers,
 		'validate' : validate
@@ -47,9 +48,26 @@ namespace.module('agherriot.story-generator.form',
 	var relations = [ [ -1, 5, 5, 5 ], [ 5, -1, 5, 5 ],
 			[ 5, 5, -1, 5 ], [ 5, 5, 5, -1 ] ];
 
+	//returns the number of characters
 	function getNumberOfCharacters() {
 		return numberOfCharacters;
 	}
+	
+	function getFormData() {
+		return {
+			'numberOfCharacters': numberOfCharacters,
+			'detailLevel': detailLevel,
+			'gender': gender,
+			'firstname': firstname,
+			'nickname': nickname,
+			'lastname': lastname,
+			'shyness': shyness,
+			'selfishness': selfishness,
+			'relations': relations		
+		};
+	}
+	
+	
 
 	/**
 	 * Generates html for a select dropdown menu.
@@ -64,7 +82,7 @@ namespace.module('agherriot.story-generator.form',
 
 		var selectText = '<select name="' + name + '">\n';
 
-		for ( var j = 0; j <= maxNumber; j++) {
+		for (var j = 0; j <= maxNumber; j++) {
 
 			if (j === Math.floor(maxNumber / 2)) {
 				selectText += '\t<option value="' + j +
@@ -91,7 +109,7 @@ namespace.module('agherriot.story-generator.form',
 
 		var ratingText = "";
 
-		for ( var i = 0; i < MAX_NUMBER_OF_CHARACTERS; i++) {
+		for (var i = 0; i < MAX_NUMBER_OF_CHARACTERS; i++) {
 
 			if (i !== characterIndex) {
 				ratingText += '<div class="like' + i +
@@ -252,7 +270,7 @@ namespace.module('agherriot.story-generator.form',
 		$("input[type=text][name=" + textBoxName + "]").blur(
 				function() {
 
-					// alert( "test" );
+					// alert("test");
 
 					if ($(this).val() === "") {
 						$(this).val(promptString);
@@ -288,7 +306,7 @@ namespace.module('agherriot.story-generator.form',
 	 */
 	function validate() {
 
-		for ( var i = 0; i < MAX_NUMBER_OF_CHARACTERS; i++) {
+		for (var i = 0; i < MAX_NUMBER_OF_CHARACTERS; i++) {
 
 			detailLevel[i] = parseInt($(
 					"input[name=detailLevel" + i + "]:checked")
@@ -308,7 +326,7 @@ namespace.module('agherriot.story-generator.form',
 			selfishness[i] = parseInt($(
 					"select[name=selfishness]").eq(i).val(), 10);
 
-			for ( var j = 0; j < MAX_NUMBER_OF_CHARACTERS - 1; j++) {
+			for (var j = 0; j < MAX_NUMBER_OF_CHARACTERS - 1; j++) {
 
 				if (i < j) {
 
@@ -339,7 +357,7 @@ namespace.module('agherriot.story-generator.form',
 	 */
 	function initialize() {
 
-		for ( var i = MAX_NUMBER_OF_CHARACTERS - 1; i >= 0; i--) {
+		for (var i = MAX_NUMBER_OF_CHARACTERS - 1; i >= 0; i--) {
 
 			$("#numberOfCharacters").after(
 					generateCharacterFormText(i));
@@ -400,7 +418,7 @@ namespace.module('agherriot.story-generator.form',
 		 * @inner Event for when the number of characters
 		 *        changes
 		 */
-		$("select[name=numberOfCharacters]").change( function(event) {
+		$("select[name=numberOfCharacters]").change(function(event) {
 
 			numberOfCharacters = parseInt($(this).val(), 10);
 

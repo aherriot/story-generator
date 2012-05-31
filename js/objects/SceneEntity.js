@@ -32,7 +32,7 @@ namespace.module('agherriot.story-generator.objects',
 		if ( type === undefined ) {
 		    
 			_selection = utility.randomIndex(sceneEntityTypes);
-	        _type = sceneEntityTypes[this.selection][0];
+	        _type = sceneEntityTypes[_selection][0];
 	        
 	    } else {
 	 

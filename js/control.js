@@ -21,15 +21,15 @@ namespace.module('agherriot.story-generator.control',
 	function setChapter(number) {
 	    currentChapter = number;
 	    
-	    $(".chapter").hide().eq( currentChapter ).show();
+	    $(".chapter").hide().eq(currentChapter).show();
 	        
-	    if ( currentChapter === 0 )
+	    if (currentChapter === 0)
 	        $(".previousChapter").hide();
 	    else
 	        $(".previousChapter").show();
 
 
-	    if ( currentChapter === totalChapters-1 ) 
+	    if (currentChapter === totalChapters-1) 
 	        $(".nextChapter").hide();
 	    else
 	        $(".nextChapter").show();
@@ -38,15 +38,15 @@ namespace.module('agherriot.story-generator.control',
 	//display the previous chapter if it exists
 	function previousChapter() {
 	    
-	    if( currentChapter > 0 ) {
+	    if(currentChapter > 0) {
 
-			$(".chapter").eq( currentChapter ).fadeOut( function() {
-				$(".chapter").eq( currentChapter - 1 ).fadeIn();
+			$(".chapter").eq(currentChapter).fadeOut(function() {
+				$(".chapter").eq(currentChapter - 1).fadeIn();
 			});  
 	        
 	        currentChapter--;
 	        
-	        if ( currentChapter === 0 )
+	        if (currentChapter === 0)
 	            $(".previousChapter").hide();
 	        
 	        $(".nextChapter").show();
@@ -56,16 +56,16 @@ namespace.module('agherriot.story-generator.control',
 	//display the next chapter if it exists
 	function nextChapter() {
 
-	    if ( currentChapter < totalChapters ) {
+	    if (currentChapter < totalChapters) {
 
-	        $(".chapter").eq( currentChapter ).fadeOut( function() {
+	        $(".chapter").eq(currentChapter).fadeOut(function() {
 	            
-	            $(".chapter").eq(currentChapter+1 ).fadeIn();   
+	            $(".chapter").eq(currentChapter+1).fadeIn();   
 	        });
 	        
 	        currentChapter++;
 
-	        if ( currentChapter === totalChapters-1 )
+	        if (currentChapter === totalChapters-1)
 	            $(".nextChapter").hide();
 
 	        $(".previousChapter").show();
@@ -88,7 +88,7 @@ namespace.module('agherriot.story-generator.control',
 	function createStory() {
 		
 		//Only if the form is valid, do we create a story
-	    if ( form.validate() ) {
+	    if (form.validate()) {
 
 	        //hide the disclaimer
 	        $("#disclaimer").slideUp();
@@ -96,7 +96,7 @@ namespace.module('agherriot.story-generator.control',
 	        
 	        var whatToHide;
 	        
-			if ( $("#options").is(":visible") ) {
+			if ($("#options").is(":visible")) {
 			    whatToHide = $("#options");
 			} else {
 				whatToHide = $("#story");
@@ -104,17 +104,17 @@ namespace.module('agherriot.story-generator.control',
 	        
 	        // Hide either the story or the form, 
 	        // And then generate the new story and finally reveal it.
-	        whatToHide.slideUp( 1000, function() {
+	        whatToHide.slideUp(1000, function() {
 
-	            story.generate( form.getNumberOfCharacters() );
+	            story.generate(form.getFormData());
 
-	            $("#story").slideDown( 1500 );
+	            $("#story").slideDown(1500);
 
 	            $("#edit").show();
 	            $("#create").text("Create New Story");
 
 	            currentChapter = 0;
-	            setChapter( currentChapter );
+	            setChapter(currentChapter);
 	        });
 	    }   
 	}
@@ -122,14 +122,14 @@ namespace.module('agherriot.story-generator.control',
 	//Registers all the control events for JQuery
 	function initialize() {
 		
-		$(".previousChapter").click( function(event) {
+		$(".previousChapter").click(function(event) {
 	        
 	        event.preventDefault();
 	        previousChapter();  
 	    
 	    });
 
-		$(".nextChapter").click( function(event) {
+		$(".nextChapter").click(function(event) {
 		    
 		    event.preventDefault();
 		    nextChapter();
@@ -137,7 +137,7 @@ namespace.module('agherriot.story-generator.control',
 		});    
 	     
 	    //The edit link is pressed
-	    $("#edit").click( function(event) {    
+	    $("#edit").click(function(event) {    
 	        
 	        event.preventDefault();
 	        editSettings();
@@ -146,7 +146,7 @@ namespace.module('agherriot.story-generator.control',
 
 
 		// generate story button is pressed
-		$("#create").click( function(event) { 
+		$("#create").click(function(event) { 
 		
 		    event.preventDefault();
 		    createStory();

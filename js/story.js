@@ -12,22 +12,21 @@ namespace.module('agherriot.story-generator.story',
 	"use strict";
 	
 	var objects = require('agherriot.story-generator.objects');
-	var form = require('agherriot.story-generator.form');
 	
 	exports.extend({
 		'generate': generate
 	});
 	
 	var characters;
-	var setting;
+	var world;
 	
 	/**
 	 * Appends a paragraph onto the end of the chapter text.
 	 * @static
 	 * @param {String} text The content to add.
 	 */
-	function setStoryTitle( text ) {
-		$("#storyTitle").text( text );
+	function setStoryTitle(text) {
+		$("#storyTitle").text(text);
 	}
 	
 	/**
@@ -36,7 +35,7 @@ namespace.module('agherriot.story-generator.story',
 	 *  * @param {int} chapter The chapter to add text to.
 	 * @param {String} text The content to add.
 	 */
-	function setChapterTitle( chapter, text ) {
+	function setChapterTitle(chapter, text) {
 		$(".chapterTitle").eq(chapter-1).text();
 	}
 	
@@ -46,7 +45,7 @@ namespace.module('agherriot.story-generator.story',
 	 * @param {int} chapter The chapter to add text to.
 	 * @param {String} text The content to add.
 	 */
-	function addParagraph( chapter, text ) {
+	function addParagraph(chapter, text) {
 		$(".chapterText").eq(chapter-1).append("<p>" + text + "</p>");
 	}
 	
@@ -63,16 +62,16 @@ namespace.module('agherriot.story-generator.story',
 	 * collected in the form.
 	 * @static
 	 */
-	function createCharacters( numberOfCharacters ) {
+	function createCharacters(formData) {
 		
 		characters = [];
 		
-		for ( var i = 0; i < numberOfCharacters; i++ ) {
+		for (var i = 0; i < formData.numberOfCharacters; i++) {
 				
-			characters[i] = new objects.Character( i, form.detailLevel[i], 
-				form.gender[i], form.firstname[i], form.nickname[i], 
-				form.lastname[i], form.shyness[i], form.selfishness[i],
-				form.relations[i]);
+			characters[i] = new objects.Character(i, formData.detailLevel[i], 
+				formData.gender[i], formData.firstname[i], formData.nickname[i], 
+				formData.lastname[i], formData.shyness[i], 
+				formData.selfishness[i], formData.relations[i]);
 		}	
 	}
 
@@ -83,11 +82,11 @@ namespace.module('agherriot.story-generator.story',
 	function display() {
 
 		setChapterTitle(1, characters[0].firstname + " at the " + 
-			setting.location );
+			world.location);
 	    
 
-	    addParagraph( 1, characters[1].toString() );
-	    addParagraph( 1, characters[2].toString() );
+	    addParagraph(1, characters[1].toString());
+	    addParagraph(1, characters[2].toString());
 	    
 	}
 
@@ -95,24 +94,24 @@ namespace.module('agherriot.story-generator.story',
 	 * Generates the text for the first chapter of the story.
 	 * @static
 	 */
-	function createChapter( currentChapter, lastChapters) {
-	    addParagraph( 1, setting.initialDescription() );
+	function createChapter(currentChapter, lastChapters) {
+	    addParagraph(1, world.initialDescription());
 	    
-	    addParagraph( 1, characters[0].toString() );
+	    addParagraph(1, characters[0].toString());
 	}
 
 	/**
 	 * The main function to generate the story. 
 	 * @static
 	 */
-	function generate( numberOfCharacters ) {
+	function generate(formData) {
 		
 		clear();
-	    createCharacters( numberOfCharacters );
-	    setting = new objects.Setting();
+	    createCharacters(formData);
+	    world = new objects.World();
 	    
-		setStoryTitle("The Adventure of " + characters[0].firstname + 
-			" and " + characters[1].firstname );
+		setStoryTitle("The Adventure of " + characters[0].getFirstname() + 
+			" and " + characters[1].getFirstname());
 	    
 	    
 		createChapter(); 

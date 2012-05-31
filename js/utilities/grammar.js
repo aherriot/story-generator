@@ -16,9 +16,9 @@ namespace.module('agherriot.story-generator.utilities',
 
 	//subjective personal pronoun
 	function getHeShe(gender) {
-		if ( gender === lists.MALE ) {
+		if (gender === lists.MALE) {
 			return "he";
-	    } else if ( gender === lists.FEMALE ) {
+	    } else if (gender === lists.FEMALE) {
 			return "she";
 		} else {
 			console.error("Received incorrect gender parameter.");
@@ -28,9 +28,9 @@ namespace.module('agherriot.story-generator.utilities',
 	
 	//objective personal pronoun
 	function getHimHer(gender) {
-		if ( gender === lists.MALE ) {
+		if (gender === lists.MALE) {
 			return "him";
-	    } else if ( gender === lists.FEMALE ) {
+	    } else if (gender === lists.FEMALE) {
 			return "her";
 		} else {
 			console.error("Received incorrect gender parameter.");
@@ -40,9 +40,9 @@ namespace.module('agherriot.story-generator.utilities',
 	
 	//possessive personal pronoun
 	function getHisHers(gender) {
-		if ( gender === lists.MALE ) {
+		if (gender === lists.MALE) {
 			return "his";
-	    } else if ( gender === lists.FEMALE ) {
+	    } else if (gender === lists.FEMALE) {
 			return "hers";
 		} else {
 			console.error("Received incorrect gender parameter.");

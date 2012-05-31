@@ -51,7 +51,7 @@ namespace.module('agherriot.story-generator.utilities',
 	 */
 	function shuffle(list) {
 	
-		return list.sort( function() { 
+		return list.sort(function() { 
 			return Math.random() - 0.5;
 		});
 	}
@@ -98,7 +98,7 @@ namespace.module('agherriot.story-generator.utilities',
 	 */
 	function addWordToList(currentList, possibleList) {
 		
-		currentList.push( randomUniqueSelection(possibleList, currentList));
+		currentList.push(randomUniqueSelection(possibleList, currentList));
 	}
 	
 	/**

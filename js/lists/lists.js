@@ -3,19 +3,32 @@
 /**
  * @namespace Lists
  */
-namespace.module('agherriot.story-generator.utilities', 
+namespace.module('agherriot.story-generator.lists', 
 	function (exports, require) {
 	"use strict";
 	
+	//Make the following symbols public:
 	exports.extend({
-		'numberName': numberName
-		
+		'numberName': numberName,
+		'genders': genders,
+		'titles': titles,
+		'maleNames': maleNames,
+		'maleNicknames': maleNicknames,
+		'femaleNames': femaleNames,
+		'femaleNicknames': femaleNicknames,
+		'lastNames': lastNames,
+		'interests': interests,
+		'positiveAdjectives': positiveAdjectives,
+		'negativeAdjectives': negativeAdjectives,
+		'neutralAdjectives': neutralAdjectives
 	});
 	
 	function numberName(n) { 
 		var names = ["Zero", "One", "Two", "Three", "Four", "Five", "Six",
 		    "Seven", "Eight", "Nine", "Ten"];
-		return names[n];
+		return function(n) {
+			return names[n];
+		};
 	}
 	
 	/** @constant */
@@ -23,33 +36,56 @@ namespace.module('agherriot.story-generator.utilities',
 	/** @constant */
 	var GENDER_FEMALE = 1;
 
-	var genders = [GENDER_MALE, GENDER_FEMALE];
+	function genders() {
+		var _genders = [GENDER_MALE, GENDER_FEMALE];
+		return function() {
+			return _genders;
+		};
+	}
 
 	var TITLE_MALE = "Mr.";
 	var TITLE_FEMALE = "Ms.";
-
-	var titles = [TITLE_MALE, TITLE_FEMALE];
 	
-	var maleNames = ["Cornelius", "William", "George", "Abraham", "Bartholomew", 
-	      "Richard", "Rosencrantz", "Guildenstern", "Lawrence", "Mortimer"];
-     var maleNicknames = ["Corny", "Willy", "Big G", "Abe", "Bart", 
-         "Dick", "Crantz", "Stern", "Larry", "Mort"];
+	function titles() {
+		var _titles = [TITLE_MALE, TITLE_FEMALE];
+		
+		return function() {
+			return _titles;
+		};
+	}
+
+	
+	function maleNames() {
+		var _maleNames = ["Cornelius", "William", "George", "Abraham", 
+		     "Bartholomew", "Richard", "Rosencrantz", "Guildenstern", 
+		     "Lawrence", "Mortimer"];
+		return function() {
+			return _maleNames;
+		};
+	}
+
+	function maleNickNames {
+	    var _maleNicknames = ["Corny", "Willy", "Big G", "Abe", "Bart", 
+	         "Dick", "Crantz", "Stern", "Larry", "Mort"];
+	    
+	}
 
 
-     var femaleNames = ["Sophia", "Elizabeth", "Abigale", "Katherine", 
+
+    var femaleNames = ["Sophia", "Elizabeth", "Abigale", "Katherine", 
          "Henrietta", "Winnifred"];
-     var femaleNicknames = ["Sophie", "Liz", "Abby", "Kate", "Hettie", 
+    var femaleNicknames = ["Sophie", "Liz", "Abby", "Kate", "Hettie", 
          "Winnie"];
 
 
-     var lastNames = ["Featherbottom", "Turbomax", "MacDonald"];
+    var lastNames = ["Featherbottom", "Turbomax", "MacDonald"];
 
-     var usedNames = [];
-     var usedLastNames = [];
+    var usedNames = [];
+    var usedLastNames = [];
 
-     var interests = ["castle", "boat", "Australian football"];
+    var interests = ["castle", "boat", "Australian football"];
 
-     var positiveAdjectives = ["admirable", "adorable", "amazing", "appealing", 
+    var positiveAdjectives = ["admirable", "adorable", "amazing", "appealing", 
          "astonishing", "astounding", "awesome", "beautiful", "brilliant", 
          "charming", "cute", "elegant", "excellent", "extraordinary", "fabulous",
          "fantastic", "fine", "graceful", "great", "incredible", "lovely",
@@ -58,38 +94,36 @@ namespace.module('agherriot.story-generator.utilities',
          "superb", "terrific", "trustworthy", "wonderful"];
 
 
-     var negativeAdjectives = ["abomidable", "bad", "despicable", "detestable",
+    var negativeAdjectives = ["abomidable", "bad", "despicable", "detestable",
          "dirty", "disgusting", "dumb", "evil", "filthy", "foggy", "foul", 
          "fraudulent", "gross", "heinous", "indecent", "nasty", "nauseating", 
          "obnoxious", "polluted", "putrid", "shady", "smelly", "stupid", "ugly", 
          "unclean", "unsportsmanlike", "venomous", "vile", "vulgar", "wicked" ];
 
 
-     var neutralAdjectives = ["acceptable", "bland", "fine", "normal", "satistfactory",
+    var neutralAdjectives = ["acceptable", "bland", "fine", "normal", "satistfactory",
          "so-so"];
 
-     var textureAdjectives = ["rough", "slimy", "slippery", "smooth"];
+    var textureAdjectives = ["rough", "slimy", "slippery", "smooth"];
 
-     var visualAdjectives = ["blue", "foggy", "red", "shinny", "tall" ];
-     var visualNouns = [];
+    var visualAdjectives = ["blue", "foggy", "red", "shinny", "tall" ];
+    var visualNouns = [];
 
-     var shapeAdjectives = ["big", "broad", "chubby", "colossal", "crooked", 
+    var shapeAdjectives = ["big", "broad", "chubby", "colossal", "crooked", 
          "curved", "deep", "fat", "flat", "gigantic", "hollow", "round", "square",
          "straight", "wiggly"];
 
-     var audioAdjectives = [ "harsh", "loud", "quiet" ];
-     var audioNouns = ["bang", "bark"];
+    var audioAdjectives = [ "harsh", "loud", "quiet" ];
+    var audioNouns = ["bang", "bark"];
 
-     var tasteAdjectives = ["bitter", "salty", "savoury", "smooth", "sour", "sugary", "sweet"];
-     var tasteNouns = [];
+    var tasteAdjectives = ["bitter", "salty", "savoury", "smooth", "sour", "sugary", "sweet"];
+    var tasteNouns = [];
 
-     var smellAdjectives = ["foul", "fragrant", "fruity","putrid", "smoky", 
+    var smellAdjectives = ["foul", "fragrant", "fruity","putrid", "smoky", 
          "strong", "sweet"];
-     var smellNouns = ["bakery", "cinnamon", "death", "lemon", "locker room", 
+    var smellNouns = ["bakery", "cinnamon", "death", "lemon", "locker room", 
          "McDonalds"];
 
-     var adverbs = ["mildly", "mostly", "slightly", "somewhat", "very"];
-
-     var adjectives = ["slimy", "green"];
+    var adverbs = ["mildly", "mostly", "slightly", "somewhat", "very"];
 
 });
