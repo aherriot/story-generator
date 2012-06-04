@@ -68,12 +68,14 @@ namespace.module('agherriot.story-generator.utilities',
 
 	    var newList = list.slice();
 
-	    for (var i in alreadyUsed) {
-	        var index = newList.indexOf(alreadyUsed[i]);
-
-	        if (index >= 0) {
-	            newList.splice(index, 1);
-	        }
+	    if ( alreadyUsed !== undefined ) {
+		    for (var i = 0; i < alreadyUsed.length; i++) {
+		        var index = newList.indexOf(alreadyUsed[i]);
+	
+		        if (index >= 0) {
+		            newList.splice(index, 1);
+		        }
+		    }
 	    }
 	    return randomSelection(newList);
 	}
@@ -144,18 +146,22 @@ namespace.module('agherriot.story-generator.utilities',
 			usedWords = [];
 		}
 		
+		// Select one of the sentences from the list
 		var choice = randomInt(array.length - 1);
+		
 		var string = array[choice][0];
-
 		var wordLists = array[choice][1];
 		
 		if( string === undefined || wordLists === undefined) {
 			console.error("Adlib() was not formatted correctly.");
 		}
 		
+		// insert the missing words from the provided wordlists
 		for(var i in array[choice][1]) {
 			string = replaceWithRandomWords(string, wordLists[i], i, usedWords);	
-		}		
+		}
+		
+		
 		return string + "&nbsp;&nbsp;";
 	}
 });

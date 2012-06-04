@@ -46,8 +46,7 @@ namespace.module('agherriot.story-generator.testing',
 				console.log("Test " + _testCount++ + ": Passed.");
 				_passedTests++;
 			} else {
-				console.log("");
-				console.log("#######Test " + _testCount++ + ": Failed.#######");
+				console.error("Test " + _testCount++ + ": Failed.");
 				console.log("Expected: " + expected);
 				console.log("Actual: " + actual);
 				console.log("");
@@ -61,8 +60,6 @@ namespace.module('agherriot.story-generator.testing',
 		}
 
 		function objectCompare(a, b) {
-			
-			
 			return a.equals(b);
 		}
 
@@ -233,7 +230,7 @@ namespace.module('agherriot.story-generator.testing',
 			
 			sentence = utility.adlib( array, usedWords);
 			
-			assert( sentence, "Testing a short, sample sentence.  ");
+			assert( sentence, "Testing a short, sample sentence.&nbsp;&nbsp;");
 			
 			print("adlib(): Used word list updated");
 			assert( usedWords, ["small", "short", "sample"] , arrayCompare  );

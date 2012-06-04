@@ -59,7 +59,15 @@ namespace.module('agherriot.story-generator.objects',
 		};
 
 		this.visualDescription = function() {
-			return "It looked nice.  ";
+			
+			return utility.adlib([
+				["The {0} of the room was reminescient of a {1}, {2}.",
+					[lists.fashionNouns, lists.visualAdjectives, 
+					 lists.visualNouns]],
+				["The {0} could best be described as {1} and {1}.",
+					[lists.fashionNouns, lists.visualAdjectives]]
+				
+			]);
 			// The styling of the room was reminescient of a
 			// ___ ___.
 			// The decor could be described as ___ and ___.
@@ -67,13 +75,12 @@ namespace.module('agherriot.story-generator.objects',
 		};
 
 		this.audioDescription = function() {
-			//return "It sounded quiet.  ";
 			
 			return utility.adlib([
 			    ["The {0} sounds of a {1} {2} throughout the room.",
 			     [lists.audioAdjectives, lists.audioNouns, lists.audioVerbs]],
 			    ["The sound could best be described as {0} and {0}",
-			     lists.audioAdjectives] 
+			     [lists.audioAdjectives]] 
 			]);
 			// The faint sounds of ___ echoed throughout the
 			// room.
@@ -96,9 +103,6 @@ namespace.module('agherriot.story-generator.objects',
 					[ lists.neutralAdjectives, lists.smellAdjectives, 
 					  lists.smellNouns ] ] 
 			]);
-
-			// A smell of ___ hung in the hair as if a had
-			// recently been there.
 
 		};
 
