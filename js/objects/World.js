@@ -2,7 +2,7 @@ namespace.module('agherriot.story-generator.objects',
 	function(exports, require) {
 	"use strict";
 
-	var utility = require('agherriot.story-generator.utilities');
+	var utility = require('agherriot.story-generator.utility');
 	var lists = require('agherriot.story-generator.lists');
 	var objects = require('agherriot.story-generator.objects');
 

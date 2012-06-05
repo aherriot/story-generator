@@ -4,7 +4,7 @@ namespace.module('agherriot.story-generator.objects',
 	function (exports, require) {
 	"use strict";
 	
-	var utility = require('agherriot.story-generator.utilities');
+	var utility = require('agherriot.story-generator.utility');
 	
 	exports.extend({
 		'SceneEntity': SceneEntity

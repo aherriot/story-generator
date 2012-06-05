@@ -23,7 +23,7 @@ namespace.module('agherriot.story-generator.objects',
 	var utility = require('agherriot.story-generator.utility');
 	var lists = require('agherriot.story-generator.lists');
 	var form = require('agherriot.story-generator.form');
-	var story = require('agherriot.stoy-generator.story');
+	var story = require('agherriot.story-generator.story');
 	
 	exports.extend({
 		'Character': Character
@@ -46,48 +46,52 @@ namespace.module('agherriot.story-generator.objects',
 		var _interests = [];
 		var _disinterests = [];
 		
+		var _patience;
+		
 		var choice, i;
 		
 		if (detailLevel === 0) {
 			
-			//console.log(lists);
+			//console.log(lists.usedFirstnames);
 			// generate name
-			_gender = utility.randomSelection( lists.genders );
+			_gender = utility.randomSelection(lists.genders);
 	        
-			if ( _gender === lists.MALE ) {
+			if (_gender === lists.GENDER_MALE) {
 			
-				choice = utility.randomUniqueIndex( lists.maleNames, 
-					lists.usedNames );
+				choice = utility.randomUniqueIndex(lists.maleNames, 
+					lists.usedFirstnames);
 
 	            _firstname = lists.maleNames[choice];
 	            _nickname = lists.maleNicknames[choice];
 	            
 	            _title = lists.TITLE_MALE;
 
-				_lastname = utility.randomUniqueSelection( lists.lastNames, 
-						lists.usedLastNames );
+				_lastname = utility.randomUniqueSelection(lists.lastnames, 
+						lists.usedLastNames);
 
-	            lists.usedFirstnames.push( _firstname );
-	            lists.usedNicknames.push( _nickname );
-	            lists.usedLastNames.push( _lastname );
+	            lists.usedFirstnames.push(_firstname);
+	            lists.usedNicknames.push(_nickname);
+	            lists.usedLastnames.push(_lastname);
 
-	        }  else {
+	        } else if(_gender === lists.GENDER_FEMALE){
 
-				choice = utility.randomUniqueIndex( lists.femaleNames, 
-					lists.usedNames );
+				choice = utility.randomUniqueIndex(lists.femaleNames, 
+					lists.usedFirstnames);
 
 	            _firstname = lists.femaleNames[choice];
 	            _nickname = lists.femaleNicknames[choice];
 
-				_lastname = utility.randomUniqueSelection( lists.lastnames, 
-					lists.usedLastnames );
+				_lastname = utility.randomUniqueSelection(lists.lastnames, 
+					lists.usedLastnames);
 
 	            _title = lists.TITLE_FEMALE;
 
-	            lists.usedFirstnames.push( _firstname );
-	            lists.usedNicknames.push( _nickname );
-	            lists.usedLastnames.push( _lastname );
-	        }
+	            lists.usedFirstnames.push(_firstname);
+	            lists.usedNicknames.push(_nickname);
+	            lists.usedLastnames.push(_lastname);
+			} else {
+				console.error("Gender is not recognized:" + _gender);
+			}
 			
 		} else {
 			
@@ -103,22 +107,22 @@ namespace.module('agherriot.story-generator.objects',
 	        _nickname = nickname;
 	        _lastname = lastname;
 	        
-	        lists.usedNames.push( _firstname );
-	        lists.usedLastNames.push( _lastname );
+	        lists.usedNames.push(_firstname);
+	        lists.usedLastNames.push(_lastname);
 		}
 		
-		if ( detailLevel === 0 || detailLevel === 1 ) {
+		if (detailLevel === 0 || detailLevel === 1) {
 			
-	        _shyness = utility.randomInt( 10 );
-	        _selfishness = utility.randomInt( 10 );
+	        _shyness = utility.randomInt(10);
+	        _selfishness = utility.randomInt(10);
 
 			// set the relationship values
-			for ( i = 0; i < form.getNumberOfCharacters(); i++ ) {
+			for (i = 0; i < form.getNumberOfCharacters(); i++) {
 				
-				if ( i !== _characterIndex ) {
-					_relations.push( utility.randomInt( 10 ) );
+				if (i !== _characterIndex) {
+					_relations.push(utility.randomInt(10));
 				} else {
-					_relations.push( -1 );
+					_relations.push(-1);
 				}
 			}
 			
@@ -127,9 +131,9 @@ namespace.module('agherriot.story-generator.objects',
 			_shyness = shyness;
 			_selfishness = selfishness;
 			
-			for( i = 0; i < form.getNumberOfCharacters(); i++) {
+			for(i = 0; i < form.getNumberOfCharacters(); i++) {
 				
-				_relations.push( relations[characterIndex][i] );
+				_relations.push(relations[characterIndex][i]);
 			}
 			
 		}        
@@ -137,12 +141,14 @@ namespace.module('agherriot.story-generator.objects',
 		// regardless of the above info, pick some topics of interest
 		
 	    // pick some interests
-		_interests.push( utility.randomUniqueSelection( lists.interests, 
-			_interests ) );
+		_interests.push(utility.randomUniqueSelection(lists.interests, 
+			_interests));
 
 		// pick some disinterests
-		_disinterests.push( utility.randomUniqueSelection( lists.interests, 
-				_disinterests.concat( _interests )) );	
+		_disinterests.push(utility.randomUniqueSelection(lists.interests, 
+				_disinterests.concat(_interests)));	
+		
+		_patience = 5;
 	    
 	    
 	    // **********************
@@ -153,25 +159,36 @@ namespace.module('agherriot.story-generator.objects',
 			return "Charater's initial description";
 		};
 
-	    /**
-	     * Opens the dialogue with the character of the given index
-	     * 
-	     * @param {int}
-	     *            characterIndex The character of the other person.
-	     * @returns {String} The output text.
-	     */
-	    this.startConversation = function( characterIndex ) {
-			if (_characterIndex === characterIndex )
-				return _firstname + "begins talking to themselves.";	
+	    this.startConversation = function(other) {
+			if (this === other) {
+				return _firstname + " begins talking to themselves.";	
+			}
+			else {
+				return "hola!";
+			}
+			
+			other.updateSituation();
 	    };
+	    
+		this.updateSituation = function() {
+			_patience--;
+		};
 	    
 		this.getFirstname = function() {
 			return _firstname;
 		};
 
-	    this.getRelation = function( characterIndex ) {
+	    this.getRelation = function(characterIndex) {
 			return this.relations[characterIndex];
 	    };
+	    
+		this.isDoneConversation = function() {
+			if (_patience > 0) {
+				return false;
+			} else {
+				return true;
+			}
+		};
 	    
 		this.equals = function(other) {
 			return this.constructor === other.constructor &&
@@ -188,11 +205,11 @@ namespace.module('agherriot.story-generator.objects',
 	            "Disinterests: " + _disinterests + "<br />" +
 	            "Relations: <br />";
 
-	        for ( var i in _relations ) {
+	        for (var i in _relations) {
 
-	            if ( _characterIndex != i ) {
+	            if (_characterIndex != i) {
 					string += "&nbsp;&nbsp;&nbsp;&nbsp;" + 
-						_firstname + ": " +
+						story.getCharacter(i).getFirstname() + ": " +
 						_relations[i] + "<br />";
 	            }
 

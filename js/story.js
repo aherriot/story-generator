@@ -92,14 +92,31 @@ namespace.module('agherriot.story-generator.story',
 		
 		addParagraph(1, world.initialDescription());
 		
+		// describe character 1
+		// character 2 comes in
+		// talk
+		addParagraph(1, characters[0].startConversation(characters[1]));
+		
+		while( !characters[0].isDoneConversation() && 
+			   !characters[1].isDoneConversation() ) {
+			
+			addParagraph(1, "reponse!");
+			characters[0].updateSituation();
+		}
+		
 		addParagraph(1, characters[0].toString());  
 	    
 	    addParagraph(1, characters[1].toString());
 	    addParagraph(1, characters[2].toString());
 	}
 	
+	function createMiddleChapter(chapterNumber) {
+		addParagraph(chapterNumber, 'Middle Chapter: ' + chapterNumber);
+	}
+	
 	function createLastChapter() {
-		
+		console.log("NumberOfCHapters: " + numberOfChapters);
+		addParagraph(numberOfChapters, 'The End:' + numberOfChapters);
 	}
 
 	/**
@@ -116,7 +133,15 @@ namespace.module('agherriot.story-generator.story',
 	    
 		setStoryTitle("The Adventure of " + characters[0].getFirstname() + 
 			" and " + characters[1].getFirstname());
-		createFirstChapter(); 
+		
+		createFirstChapter();
+		
+		for (var i = 2; i < numberOfChapters; i++) {
+			console.log(i + " " + numberOfChapters);
+			createMiddleChapter(i);	
+		}
+		
+		createLastChapter();
 	}
 	
 	

@@ -4,7 +4,7 @@ namespace.module('agherriot.story-generator.testing',
 	
 	var objects = require('agherriot.story-generator.objects');
 	var control = require('agherriot.story-generator.control');
-	var utility = require('agherriot.story-generator.utilities');
+	var utility = require('agherriot.story-generator.utility');
 	
 	exports.extend({
 		'Test': Test

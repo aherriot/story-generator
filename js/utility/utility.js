@@ -1,4 +1,4 @@
-namespace.module('agherriot.story-generator.utilities', 
+namespace.module('agherriot.story-generator.utility', 
 	function (exports, require) {
 	"use strict";
 	
@@ -66,7 +66,13 @@ namespace.module('agherriot.story-generator.utilities',
 	 */
 	function randomUniqueSelection(list, alreadyUsed) {
 
-	    var newList = list.slice();
+		var newList;
+		
+		if (list !== undefined) {
+			newList = list.slice();
+		} else {
+			console.error('Selection list is not defined.');
+		}
 
 	    if ( alreadyUsed !== undefined ) {
 		    for (var i = 0; i < alreadyUsed.length; i++) {

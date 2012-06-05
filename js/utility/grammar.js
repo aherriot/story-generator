@@ -2,7 +2,7 @@
  * Message namespace.
  * @function blah blah
  */
-namespace.module('agherriot.story-generator.utilities', 
+namespace.module('agherriot.story-generator.utility', 
 	function (exports, require) {
 	"use strict";
 	

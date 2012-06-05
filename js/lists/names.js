@@ -48,6 +48,8 @@ namespace.module('agherriot.story-generator.lists',
     //Make the following symbols public:
 	exports.extend({
 		'numberName': numberName,
+		'GENDER_MALE': GENDER_MALE,
+		'GENDER_FEMALE': GENDER_FEMALE,
 		'genders': genders,
 		'titles': titles,
 		'maleNames': maleNames,
