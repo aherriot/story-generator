@@ -20,9 +20,10 @@ namespace.module('agherriot.story-generator.objects',
 	function (exports, require) {
 	"use strict";
 	
-	var utility = require('agherriot.story-generator.utilities');
+	var utility = require('agherriot.story-generator.utility');
 	var lists = require('agherriot.story-generator.lists');
 	var form = require('agherriot.story-generator.form');
+	var story = require('agherriot.stoy-generator.story');
 	
 	exports.extend({
 		'Character': Character
@@ -187,7 +188,7 @@ namespace.module('agherriot.story-generator.objects',
 	            "Disinterests: " + _disinterests + "<br />" +
 	            "Relations: <br />";
 
-	        for ( var i in this.relations ) {
+	        for ( var i in _relations ) {
 
 	            if ( _characterIndex != i ) {
 					string += "&nbsp;&nbsp;&nbsp;&nbsp;" + 

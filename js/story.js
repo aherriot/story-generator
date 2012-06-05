@@ -14,11 +14,17 @@ namespace.module('agherriot.story-generator.story',
 	var objects = require('agherriot.story-generator.objects');
 	
 	exports.extend({
-		'generate': generate
+		'generate': generate,
+		'getCharacter': getCharacter
 	});
 	
 	var characters;
 	var world;
+	var numberOfChapters;
+	
+	function getCharacter(index) {
+		return characters[index];
+	}
 	
 	/**
 	 * Appends a paragraph onto the end of the chapter text.
@@ -76,28 +82,24 @@ namespace.module('agherriot.story-generator.story',
 	}
 
 	/**
-	 * Put the generated story into the HTML.
-	 * @static 
-	 */
-	function display() {
-
-		setChapterTitle(1, characters[0].firstname + " at the " + 
-			world.location);
-	    
-
-	    addParagraph(1, characters[1].toString());
-	    addParagraph(1, characters[2].toString());
-	    
-	}
-
-	/**
 	 * Generates the text for the first chapter of the story.
 	 * @static
 	 */
-	function createChapter(currentChapter, lastChapters) {
-	    addParagraph(1, world.initialDescription());
+	function createFirstChapter() {
+
+		setChapterTitle(1, characters[0].firstname + " at the " + 
+				world.location);
+		
+		addParagraph(1, world.initialDescription());
+		
+		addParagraph(1, characters[0].toString());  
 	    
-	    addParagraph(1, characters[0].toString());
+	    addParagraph(1, characters[1].toString());
+	    addParagraph(1, characters[2].toString());
+	}
+	
+	function createLastChapter() {
+		
 	}
 
 	/**
@@ -110,12 +112,11 @@ namespace.module('agherriot.story-generator.story',
 	    createCharacters(formData);
 	    world = new objects.World();
 	    
+	    numberOfChapters = formData.numberOfCharacters;
+	    
 		setStoryTitle("The Adventure of " + characters[0].getFirstname() + 
 			" and " + characters[1].getFirstname());
-	    
-	    
-		createChapter(); 
-	    display(); 
+		createFirstChapter(); 
 	}
 	
 	

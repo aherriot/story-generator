@@ -28,16 +28,18 @@ namespace.module('agherriot.story-generator.control',
 	    
 	    $(".chapter").hide().eq(currentChapter).show();
 	        
-	    if (currentChapter === 0)
+	    if (currentChapter <= 0) {
 	        $(".previousChapter").hide();
-	    else
+	    } else {
 	        $(".previousChapter").show();
+	    }
 
 
-	    if (currentChapter === totalChapters-1) 
+	    if (currentChapter >= totalChapters-1) {
 	        $(".nextChapter").hide();
-	    else
+	    } else {
 	        $(".nextChapter").show();
+	    }
 	}
 	
 	//display the previous chapter if it exists
@@ -46,35 +48,42 @@ namespace.module('agherriot.story-generator.control',
 	    if(currentChapter > 0) {
 
 			$(".chapter").eq(currentChapter).fadeOut(function() {
-				$(".chapter").eq(currentChapter - 1).fadeIn();
+				
+				$(".chapter").eq(currentChapter-1).fadeIn();
+				
+		        currentChapter--;
+		        
+		        if (currentChapter <= 0)
+		            $(".previousChapter").hide();
+		        
+		        $(".nextChapter").show();
 			});  
-	        
-	        currentChapter--;
-	        
-	        if (currentChapter === 0)
-	            $(".previousChapter").hide();
-	        
-	        $(".nextChapter").show();
-	    }       
+	    } 
+		console.log("currentChapter: " + currentChapter +
+				", totalChapters: " + totalChapters);
 	}
 	
 	//display the next chapter if it exists
 	function nextChapter() {
 
-	    if (currentChapter < totalChapters) {
+	    if (currentChapter < totalChapters-1) {
 
 	        $(".chapter").eq(currentChapter).fadeOut(function() {
 	            
 	            $(".chapter").eq(currentChapter+1).fadeIn();   
+	            
+		        currentChapter++;
+
+		        if (currentChapter >= totalChapters-1)
+		            $(".nextChapter").hide();
+
+		        $(".previousChapter").show();
 	        });
 	        
-	        currentChapter++;
 
-	        if (currentChapter === totalChapters-1)
-	            $(".nextChapter").hide();
-
-	        $(".previousChapter").show();
 	    }
+	    console.log("currentChapter: " + currentChapter +
+				", totalChapters: " + totalChapters);
 	}
 	
 	

@@ -43,7 +43,7 @@ namespace.module('agherriot.story-generator.objects',
 
 		this.openingLine = function() {
 			return utility.adlib([
-				["It was a {0} and {1} night!",
+				["It was a {0} and {1} night.",
 					[ lists.visualAdjectives, lists.audioAdjectives ] ],
 
 				["Once upon a time, there was a {0} " + _location + ".",
